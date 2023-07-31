@@ -1,0 +1,41 @@
+<%-include("../layout/adminLayout/header.ejs") %>
+<main id="main" class="main">
+<div class="row row-cols-1 row-cols-md-3 g-4 mt-3 mb-5 w-100 px-5">
+    <div class="table" >
+        <table class="table table-light table-striped table-responsive" >
+        <thead>
+            
+            <tr>
+                <th>sl.no</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Payment</th>
+                <th>view</th>
+            </tr>
+            
+        </thead>
+        
+        <tbody>
+                <% for(let i=0;i<orders.length;i++){ %>
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= users[i].user.fullname %></td>
+                    <td><%=orders[i].order_date.toLocaleDateString('en-US', { 
+                        month: 'long', 
+                        day: 'numeric',
+                        year: 'numeric',}); %></td>
+                    <td>$<%= orders[i].price.toFixed(2) %></td>
+                    <td><%= orders[i].order_status %></td>
+                    <td><%if(orders[i].payment_method){ %>Cash on delivery<% } %></td>
+                    <td><a href="/admin/orderDetails?userId=<%=users[i].user._id %>&orderId=<%= users[i]._id %>" class="btn btn-primary">view</a></td>
+                </tr>
+                <% } %>
+            
+        </tbody>
+    </table>
+        </div>
+
+</main>
+<%- include("../layout/adminLayout/footer.ejs") %>

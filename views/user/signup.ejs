@@ -1,0 +1,134 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+
+<section>
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+              <h2 class=" text-center mb-5" style="color: black;">Sign up</h2>
+            <div class="card" style="border-radius: 15px; background-color: black;">
+              <div class="card-body p-5 ">
+  
+                <form action="/register" method="post" id="form1">
+  
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="fullname"  style="color: white;" >Full Name</label>
+                      <input type="text" id="fullname" class="form-control form-control-lg" name="fullname" required />
+                      <div id="username_error" class="error  text-danger" style="display: none;">Invalid username format</div>
+                    </div>
+  
+                  <div class="form-outline mb-4">
+                      <label class="form-label" for="email"  style="color: white;" >Your Email</label>
+                    <input type="email" id="email" class="form-control form-control-lg" name="email" required />
+                    <div id="email_error" class="error  text-danger" style="display: none;">Invalid email format</div>
+
+                  </div>
+  
+                 
+  
+                  <div class=" ">
+
+                    <div>
+                        <label class="form-label" for="password"  style="color: white;">Enter password</label>
+                        <input type="password" id="password" class="form-control form-control-lg" size="15" name="password"/>
+                        <div id="password_error" class="error text-danger" style="display: none;">Invalid password format  example Abc12345</div>
+                      </div>
+
+                    <div>
+                        <label class="form-label " for="confirmPassword"  style="color: white;">Repeat your password</label>
+                        <input type="password" id="re-password" class="form-control form-control-lg " size="15" name="re_password" required/>
+                        <div id="re_password_error" class="error  text-danger" style="display: none;">Passwords do not match</div>
+                      </div>
+
+                  </div>
+                
+                 
+                  <br>
+                  <br>
+                  <div class="d-flex justify-content-center">
+                    <button type="submit"
+                      class="btn  btn-block btn-lg gradient-custom-4 "  style="background-color: #FFD333; color: black;">Register</button>
+                  </div>
+                  <p class="'error_message text-danger">
+                    <%=message%>
+                  </p>
+  
+                  <p class="text-center  mt-5 mb-0 " style="color: white;">Have already an account? <a href="/login"
+                      class="fw-bold " style="color: #FFD333;"><u>Login here</u></a></p>
+  
+                </form>
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- <script>
+    let form=document.querySelector('#form');
+const email= document.querySelector('#email');
+const emailRegex =  /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+form.addEventListener('submit', function (e) {
+    // prevent the form from submitting
+    e.preventDefault();
+    if (!emailRegex.test(email.value)) {
+    document.getElementById("empty_email").innerHTML = "Incorrect email format";
+    document.getElementById("empty_email").style.display="block"
+  }
+  else{
+    document.getElementById("empty_email").innerHTML = "";
+    document.getElementById("empty_email").style.display="none"
+    form.submit()
+  }
+
+});
+</script> -->
+<script>
+  let form = document.querySelector('#form1');
+  const email = document.querySelector('#email');
+  const username = document.querySelector('#username');
+  const password = document.querySelector('#password');
+  const confirm = document.querySelector('#re-password');
+  const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+  const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    resetErrors();
+
+    let error = false;
+
+    if (email && !emailRegex.test(email.value)) {
+      document.getElementById("email_error").style.display = "block";
+      error = true;
+    }
+
+    if (username && !usernameRegex.test(username.value)) {
+      document.getElementById("username_error").style.display = "block";
+      error = true;
+    }
+
+    if (password && !passwordRegex.test(password.value)) {
+      document.getElementById("password_error").style.display = "block";
+      error = true;
+    } else if (confirm && password.value !== confirm.value) {
+      document.getElementById("re_password_error").style.display = "block";
+      error = true;
+    }
+
+    if (!error) {
+      form.submit();
+    }
+  });
+
+  function resetErrors() {
+    document.getElementById("email_error").style.display = "none";
+    document.getElementById("username_error").style.display = "none";
+    document.getElementById("password_error").style.display = "none";
+    document.getElementById("re_password_error").style.display = "none";
+  }
+</script>
+  <%- include("../layout/simpleLayout/footer.ejs") %>
+  

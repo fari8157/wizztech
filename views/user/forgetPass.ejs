@@ -1,0 +1,40 @@
+
+<%- include("../layout/simpleLayout/header.ejs") %>
+<section>
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+              <h1 class=" text-center mb-5" style="color: black;">Password Recovery</h1>
+            <div class="card" style="border-radius: 15px; background-color: black;">
+              <div class="card-body p-5 ">
+                <form action="/forgetPassword" method="post">
+                    <h2 style="color:#FFD333;">Forgot your password?</h2>
+                    <h6 style="color:#FFD333;">Forgot your password empowers you.</h6>
+                    <br>
+                    <br>
+                    
+                    <div class="form-outline mb-4">
+                       <label class="form-label" for="form3Example3cg"  style="color:#FFD333;"> Enter Your Email </label>
+                     <input type="email" id="form3Example3cg" class="form-control form-control-lg"  name="email"/>
+                   </div>
+                   <br>
+                   <a href=""><h6 style="color:#FFD333; cursor: pointer;">Back to Login</h6></a>
+                   <div class="d-flex justify-content-center">
+                    <button type="submit"
+                      class="btn  btn-block btn-lg gradient-custom-4 "  style="background-color: #FFD333; color: black;">SEND</button>
+                  </div>
+
+   
+                </form>
+                
+               
+  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <%- include("../layout/simpleLayout/footer.ejs") %>

@@ -1,0 +1,42 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+
+<section>
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+              <h2 class=" text-center mb-5" style="color: black;"></h2>
+            <div class="card " style="border-radius: 15px; background-color: black; ">
+              <div class="card-body p-5  ">
+
+
+                <form action="<%=localaction%>" method="post">
+                    <h4 style="color:#FFD333; ;" class="text-center">verification-code</h4>
+                    <div  class="d-flex justify-content-center">
+             
+                    <input type="text" class="col-2" name="otp1">
+                    <input type="text"  class="col-2" name="otp2">
+                    <input type="text" class="col-2" name="otp3">
+                    <input type="text" class="col-2" name="otp4">
+                    
+                    </div>
+                    <p class="'error_message text-danger d-flex justify-content-center">
+                      <%=message%>
+                    </p>
+                    <div class="d-flex justify-content-center">
+                      
+                        <button type="submit"
+                          class="btn  mt-4"  style="background-color: #FFD333; color: black;">confirm</button>
+                      </div>
+      
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <%- include("../layout/simpleLayout/footer.ejs") %>

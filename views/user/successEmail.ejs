@@ -1,0 +1,23 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            class="img-fluid" alt="Phone image">
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+         
+          
+            <h3>Hello   <span><%=message%></span> </h3>
+            <h1>successfully verified.</h1>
+            
+            <a href="/login" class="text-white text-decoration-none"><button type="button" class="btn btn-primary btn-lg btn-block p-2">login</button></a>
+       
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%- include("../layout/simpleLayout/footer.ejs") %>

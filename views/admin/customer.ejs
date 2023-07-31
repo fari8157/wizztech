@@ -1,0 +1,124 @@
+<%- include("../layout/adminLayout/header.ejs") %>
+<style>
+.swal-btn-gap {
+  margin-left: 10px; /* Adjust the value as needed */
+}</style>
+
+<main id="main" class="main">
+  <div class="container">
+    <div class="d-flex justify-content-center mt-3">
+      <form action="">
+        <div class="input-group">
+          <input type="search" name="search" class="form-control" placeholder="Search">
+          <button type="submit" class="btn btn-dark">Search</button>
+        </div>
+      </form>
+    </div>
+    <div class="table-responsive mt-4">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th>Sl.no</th>
+            <th>Join Date</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Access</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i = 0; i < user.length; i++) { %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td>
+                <%=user[i].created.toLocaleDateString('en-US', { 
+                    month: 'long', 
+                    day: 'numeric',
+                    year: 'numeric',
+                     });%>                    
+            </td>
+              <td><%= user[i].fullname %></td>
+              <td><%= user[i].email %></td>
+              <td class="text-<%= user[i].access ? 'warning' : 'danger' %>">
+                <%= user[i].access ? 'Allowed' : 'Disabled' %>
+              </td>
+              <td>
+                <form action="/admin/customer/?id=<%= user[i]._id %>" method="post" id="customerForm<%= i %>">
+                  <input type="hidden" name="access" value="<%= user[i].access ? 'false' : 'true' %>">
+                  <button type="button" class="btn btn-<%= user[i].access ? 'danger' : 'warning' %>"
+                    onclick="confirmAccessChange('<%= i %>', '<%= user[i].access %>')">
+                    <%= user[i].access ? 'Disable' : ' Allow' %>
+                  </button>
+                </form>
+              </td>
+              
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function confirmAccessChange(index, access) {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success swal-btn-gap',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    });
+
+    if (access=='true') {
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure you want to disable access?',
+        text: 'This will prevent the user from accessing certain features.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: ' cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Submit the form
+          document.getElementById('customerForm' + index).submit();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your action has been cancelled.',
+            'error'
+          );
+        }
+      });
+    } else {
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure you want to allow access?',
+        text: 'This will grant the user access to certain features.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, allow access!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Submit the form
+          document.getElementById('customerForm' + index).submit();
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your action has been cancelled.',
+            'error'
+          );
+        }
+      });
+    }
+  }
+</script>
+
+<%- include("../layout/adminLayout/footer.ejs") %>
+
+
+
+

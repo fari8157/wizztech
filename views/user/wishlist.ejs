@@ -1,0 +1,76 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+
+<div class="container-fluid vh-100">
+  <div class="row m-0">
+    <div class="col-lg-3 col-md-4">
+      <!-- Sidebar content -->
+      <div class="row h-50 align-items-center">
+        <div class="col">
+          <div class="row h-75">
+            <div class="col">
+              <div class="row justify-content-center">
+                <div class="col-6 d-flex justify-content-center">
+                  <div style="height: 8rem;width: 8rem;border: .05rem solid rgb(174, 171, 171);" class="rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="fa fa-user" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-6 d-flex flex-column align-items-center">
+                  <div class="row">Salman</div>
+                  <div style="font-size: .75rem;" class="row">Joined June 19, 2023</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-6 d-flex flex-column">
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="" class="nav-link text-dark">Profile</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="" class="nav-link text-dark b">Orders</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="" class="nav-link text-dark">Address</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="" class="nav-link text-dark">Wishlist</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="" class="nav-link text-dark">Order</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-9 col-md-8">
+      <div class="container-fluid">
+        <div class="row px-xl-5">
+          <div class="col-lg-8 table-responsive mb-5 ml-auto text-right">
+            <table class="table table-light table-borderless table-hover text-center mb-0" style="font-size: 1.2rem;">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Products</th>
+                  <th>Price</th>
+                  <th>Add to Cart</th>
+                  <th>Remove</th>
+                </tr>
+              </thead>
+              <tbody class="align-middle">
+                <tr>
+                  <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 70px;"> Product Name</td>
+                  <td class="align-middle">$150</td>
+                  <td class="align-middle">
+                    <button class="btn btn-sm btn-primary btn-add-to-cart">
+                      Add to Cart
+                    </button>
+                  </td>
+                  <td class="align-middle">
+                    <button class="btn btn-sm btn-danger">
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include("../layout/simpleLayout/footer.ejs") %>

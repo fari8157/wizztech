@@ -1,0 +1,348 @@
+
+<%- include("../layout/simpleLayout/header.ejs") %>
+  
+
+    <!-- Breadcrumb Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark" href="#">Home</a>
+                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <span class="breadcrumb-item active">Checkout</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label>Full Name</label>
+                            <input class="form-control" type="text" value="<%=userData.fullname%>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Building Name</label>
+                            <input class="form-control" type="text" value="<%=shippingAdress.buildingName%>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Street</label>
+                            <input class="form-control" type="text" value="<%=shippingAdress.street%>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No</label>
+                            <input class="form-control" type="text" value="<%=shippingAdress.phoneNumber%>">
+                        </div>
+                       
+                        <div class="col-md-6 form-group">
+                            <label>Country</label>
+                            <input class="form-control" type="text" value="<%=shippingAdress.country%>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" type="text" value="<%=shippingAdress.city%>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <input class="form-control" type="text" value="<%=shippingAdress.state%>">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>ZIP Code</label>
+                            <input class="form-control" type="text" value="<%=shippingAdress.zipCode%>">
+                        </div>
+                        <div class="col-md-12 form-group">
+                           
+                        </div>
+                        <div class="col-md-12">
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse mb-5" id="shipping-address">
+                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <form class="mb-30" id="couponForm">
+                    <div class="input-group">
+                        <input type="text" id="couponName" pattern="^(?!.*\s)[^\s]+(?<!\s)$" name="coupon" class="form-control border-0 p-4" placeholder="Coupon Code" required>
+                        <div class="input-group-append">
+                            <button  type='submit'class="btn btn-primary">Apply Coupon</button>
+                        </div>
+                    </div>
+                </form>
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <h6 class="mb-3">Products</h6>
+                    <% for(let i=0;i<cart.items.length;i++){ %>
+                    <div class="border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <p><%= productList[i].name %></p>
+                            <p>&#8377;<%= cart.items[i].totalPrice.toFixed(2) %></p>
+                        </div>
+                       
+                    </div>
+                    <% } %>
+                    <div class="border-bottom pt-3 pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Subtotal</h6>
+                            <h6>&#8377;<%= cart.cartPrice.toFixed(2) %></h6>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Coupon</h6>
+                            <h6 class=" couponShow">$0</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">free</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Total</h5>
+                            <h5  id="totalprice">&#8377;<%= cart.cartPrice.toFixed(2) %></h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-5">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
+                    <div class="bg-light p-30">
+                        <div class="form-group paymentx">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="cod" name="payment" id="cod">
+                                <label class="custom-control-label" for="paypal">Cash on Delivery</label>
+                            </div>
+                        </div>
+                        <div class="form-group paymentx">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="online" name="payment" id="online">
+                                <label class="custom-control-label" for="directcheck">Pay Online</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-4 paymentx">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" value="wallet" name="payment" id="wallet">
+                                <label class="custom-control-label" for="banktransfer">Wallet Payment</label>
+                            </div>
+                        </div>
+                        <button class="btn btn-block btn-primary font-weight-bold py-3" style="display: none;"  id="address-btn" onclick="placeorder()">Place Order</button>
+                    </div>
+                </div>
+                <input type="hidden" name="address" value="<%= addressId %>" id="addressId">
+            
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+    <!-- axios cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
+
+    <!-- sweet alert cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // $('input:radio').change(function () {//Clicking input radio
+            //     var radioClicked = $(this).attr('id');
+            //     unclickRadio();
+            //     removeActive();
+            //     clickRadio(radioClicked);
+            //     makeActive(radioClicked);
+            // });
+            $(".paymentx").click(function () {//Clicking the card
+                var inputElement = $(this).find('input[type=radio]').attr('id');
+                // var paymentOption= $(this).find('input[type=radio]').attr('value');
+                console.log(inputElement);
+                btnShow();
+                unclickRadio();
+                removeActive();
+                makeActive(inputElement);
+                clickRadio(inputElement);
+            });
+        });
+
+        function btnShow() {
+            $("#address-btn").css("display", "block");
+        }
+
+        function unclickRadio() {
+            $("input:radio").prop("checked", false);
+        }
+
+        function clickRadio(inputElement) {
+            $("#" + inputElement).prop("checked", true);
+        }
+
+        function removeActive() {
+            $(".card").removeClass("active");
+        }
+
+        function makeActive(element) {
+            $("#" + element + "-card").addClass("active");
+        }
+
+
+const couponForm = document.getElementById('couponForm');
+
+couponForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
+    const coupon = document.getElementById('couponName');
+    const addressId = document.getElementById('addressId');
+    console.log(coupon);
+    console.log(addressId);
+    axios({
+        method: "post",
+        url: "/checkout/couponApply",
+        data: {
+            couponName: coupon.value,
+            addressId: addressId.value,
+            cartPrice: '<%= cart.cartPrice %>'
+        }
+    })
+    .then((result)=>{
+        console.log(result);
+        if(result.data.response == false){
+            Swal.fire({
+            icon: "warning",
+            title: "Invalid coupon",
+            })
+            document.querySelector('.couponShow').innerHTML= `$${0}`;
+            document.querySelector('.couponShow').removeAttribute("id");
+            document.getElementById('totalprice').innerHTML= `$${'<%= cart.cartPrice.toFixed(2) %>'}`;
+        }else if(result.data.response == "min"){
+
+            Swal.fire({
+                icon: "warning",
+                title: "You can't apply this coupon",
+            })
+
+        }else{
+            
+            document.querySelector('.couponShow').innerHTML= `$${result.data.coupon.discount}`;
+            document.querySelector('.couponShow').setAttribute("id",result.data.coupon._id);
+            document.getElementById('totalprice').innerHTML= `$${('<%= cart.cartPrice %>'- result.data.coupon.discount).toFixed(2)}`;
+        }
+    })
+})
+
+
+function handleOnlinePayment(){
+            const payment = document.querySelector('input[name="payment"]:checked').value;
+            const addressId = document.getElementById('addressId').value;
+            const couponId = document.querySelector('.couponShow').id;
+
+
+            $.ajax({
+                url: "/razorpay",
+                type: "POST",
+                data: {
+                    coupon: couponId
+                },
+                success: function(res){
+                    if(res.success){
+                        var options = {
+                            "key": ""+res.key_id+"",
+                            "amount": ""+res.amount+"",
+                            "amount": "INR",
+                            "name": "WIZZTECH",
+                            "image": "https://dummyimage.com/",
+                            "order_id": ""+res.order_id+"",
+                            "handler": function(response){
+
+                                axios({
+                                    method: "post",
+                                    url: '/checkout',
+                                    data: {
+                                        payment: payment,
+                                        address: addressId,
+                                        payment_id: response.razorpay_payment_id,
+                                        coupon: couponId,
+                                    }
+                                })
+                                .then((result)=>{
+                                    if(result.data.response){
+                                        location.href=`/order/success?orderId=${result.data.orderId}`;
+                                    }
+                                })
+
+                            },
+                            "prefill": {
+                                "name": ""+res.name+"",
+                                "email": ""+res.email+""
+                            },
+                            "theme": {
+                                "color": "#e0a80d"
+                            }
+                        };
+                        var razorpayObject = new Razorpay(options);
+                        razorpayObject.on('payment.failed', function (response){
+                                alert("Payment Failed");
+                        });
+                        razorpayObject.open();
+                    }
+                }
+            })
+
+            
+            
+
+        }
+
+function placeorder(){
+            const payment = document.querySelector('input[name="payment"]:checked').value;
+            const addressId = document.getElementById('addressId').value;
+            const couponId = document.querySelector('.couponShow').id;
+
+            if(payment=="online"){
+
+                handleOnlinePayment();
+                
+            }else{
+                axios({
+                method: "post",
+                url: '/checkout',
+                data: {
+                    payment: payment,
+                    address: addressId,
+                    coupon: couponId,
+                }
+                
+                })
+                .then((result)=>{
+                    if(result.data.response){
+                        location.href=`/order/success?orderId=${result.data.orderId}`;
+                    }
+                })
+            }
+            
+        }
+
+    </script>
+
+
+
+
+
+
+
+
+<%- include("../layout/simpleLayout/footer.ejs") %>

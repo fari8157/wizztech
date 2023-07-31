@@ -1,0 +1,58 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <h2 class="text-center mb-5" style="color: black;">VERIFY PASSWORD</h2>
+          <div class="card" style="border-radius: 15px; background-color: black;">
+            <div class="card-body p-5">
+
+              <form action="/profile/verifyPassword" method="post">
+                <!-- Password input -->
+                <div class="form-outline mb-4 position-relative">
+                  <label class="form-label" for="password" style="color: white;">Enter The Old Password</label>
+                  <div class="input-group">
+                    <input type="password" id="passwordInput" class="form-control" name="password" required />
+                    <div class="input-group-append">
+                      <span class="input-group-text show-password-icon" onclick="togglePasswordVisibility()">
+                        <i class="fas fa-eye-slash"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <p class="text-danger"><%= message %></p>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary align-items-center">Send Verification Code</button>
+                </div>
+              </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Function to toggle password visibility
+  function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('passwordInput');
+    const showPasswordIcon = document.querySelector('.show-password-icon i');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      showPasswordIcon.classList.remove('fa-eye-slash');
+      showPasswordIcon.classList.add('fa-eye');
+    } else {
+      passwordInput.type = 'password';
+      showPasswordIcon.classList.remove('fa-eye');
+      showPasswordIcon.classList.add('fa-eye-slash');
+    }
+  }
+</script>
+
+<%- include("../layout/simpleLayout/footer.ejs") %>

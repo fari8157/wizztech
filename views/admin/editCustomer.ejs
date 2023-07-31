@@ -1,0 +1,52 @@
+<%- include("../layout/adminLayout/header.ejs") %>
+<main id="main" class="main">
+
+  <section class="vh-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5 bg-black" style="border-radius: 15px;">
+                <h2 class="text-uppercase text-center mb-5" style="color:  goldenrod;;">Edit User</h2>
+                <hr style="color:  goldenrod;;">
+  
+                <form action="/admin/editCustomer" method="post">
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3cg" style="color:  goldenrod;">Username</label>
+                    <input type="text" name="username" id="form3Example3cg" class="form-control form-control-lg" required value="<%= user.username %>"/>
+                  </div>
+  
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3cg" style="color:  goldenrod;">Email</label>
+                    <input type="email" name="email" id="form3Example3cg" class="form-control form-control-lg" required value="<%= user.email%>"/>
+                  </div>
+                  <label style="color:  goldenrod;">Access</label> 
+                  <select name="access">
+                    <option value="true"<% if(user.access){%> selected <% } %> >Allowed</option>
+                        <option value="false"<% if(!user.access){%> selected <% } %> >Denied</option>
+
+                  </select>
+  
+                  <div>
+                    <input type="hidden" name="_id" value="<%= user._id %>">
+                  </div>
+                  <div class="d-flex justify-content-center mt-5">
+                    <button type="submit" name="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" style="background-color:  goldenrod;; color: black; border:none;">Update User</button> <!-- Set the background and text color to golden yellow -->
+                  </div>
+                </form>
+  
+                <a href="/admin/customer/" style="color: goldenrod;;">Back to home</a> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+</main>
+<%- include("../layout/adminLayout/footer.ejs") %>

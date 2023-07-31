@@ -1,0 +1,84 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+<style>
+  .btn-view {
+    border: .05rem solid rgb(174, 171, 171);
+    background-color: transparent;
+    color: #000;
+    transition: all 0.3s;
+  }
+  .btn-view:hover {
+    background-color: #7FAD39;
+    color: #fff;
+  }
+</style>
+<div class="container-fluid vh-100">
+  <div class="row m-0">
+    <div class="col-lg-3 col-md-4">
+      <!-- Sidebar content -->
+      <div class="row h-50 align-items-center">
+        <div class="col">
+          <div class="row h-75">
+            <div class="col">
+              <div class="row justify-content-center">
+                <div class="col-6 d-flex justify-content-center">
+                  <div style="height: 8rem;width: 8rem;border: .05rem solid rgb(174, 171, 171);" class="rounded-circle d-flex align-items-center justify-content-center">
+                    <i class="fa fa-user" style="font-size: 2.5rem;"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-6 d-flex flex-column align-items-center">
+                  <div class="row">Salman</div>
+                  <div style="font-size: .75rem;" class="row">Joined June 19, 2023</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-6 d-flex flex-column">
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="/profile" class="nav-link text-dark">Profile</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="/orders" class="nav-link text-dark bg-primary">Orders</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="/addAddress" class="nav-link text-dark">Address</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="" class="nav-link text-dark">Wishlist</a></div>
+          <div style="border: .05rem solid rgb(174, 171, 171);min-height: 2rem"><a href="/cart" class="nav-link text-dark">Cart</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-5 ml-auto col-lg-9 col-md-8 rounded">
+      <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand">My Orders</a>
+      </nav>
+
+      <div class="col-md-12  mt-4">
+        <% for(let i=0; i< products.length; i++){  %>
+        <div class="row mb-3">
+            <div class="col-md-12 col-sm-12">
+                <div class="card text-center">
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex justify-content-start"><img class="rounded" style="width: 3rem;height: 3rem;" src="<%= products[i].product.image[0].url %>" alt=""></div>
+                            <div class="d-flex flex-column align-items-start" style="font-size: .80rem;">
+                                <div>Quantity: <%=orders.order_date.toLocaleDateString('en-US', { 
+                                    month: 'long', 
+                                    day: 'numeric',
+                                    year: 'numeric',});%></div>
+                                <div>Product: <%= products[i].product.name %></div>
+                                <div>Quantity: <%= products[i].quantity %></div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <div style="font-size: .90rem;" class="text-warning"><%= orders.order_status %></div>
+                            <kbd href="#" class="btn-danger mt-2">cancel</kbd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+    </div>
+</div>
+        </div>
+<%- include("../layout/simpleLayout/footer.ejs") %>

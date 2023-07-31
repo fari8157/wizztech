@@ -1,0 +1,90 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+<section>
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <h1 class=" text-center mb-5" style="color: black;">Password Recovery</h1>
+                    <div class="card" style="border-radius: 15px; background-color: black;">
+                        <div class="card-body p-5 ">
+                            <form id="resetPasswordForm" action="/resetPassword" method="post">
+
+                                <br>
+                                <br>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="passwordInput" style="color:#FFD333;">Enter Your password</label>
+                                    <div class="input-group">
+                                        <input type="password" id="passwordInput" class="form-control form-control-lg" name="password" required />
+                                        <button type="button" id="showPasswordBtn" class="btn btn-secondary" onclick="togglePasswordVisibility('passwordInput')">
+                                            <i id="showPasswordIcon" class="fa fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="rePasswordInput" style="color:#FFD333;">Re-Password</label>
+                                    <div class="input-group">
+                                        <input type="password" id="rePasswordInput" class="form-control form-control-lg" name="rePassword" required />
+                                        <button type="button" id="showRePasswordBtn" class="btn btn-secondary" onclick="togglePasswordVisibility('rePasswordInput')">
+                                            <i id="showRePasswordIcon" class="fa fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <br>
+                                <a href=""><h6 style="color:#FFD333; cursor: pointer;">Back to Login</h6></a>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-block btn-lg gradient-custom-4" style="background-color: #FFD333; color: black;">Reset my password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include("../layout/simpleLayout/footer.ejs") %>
+<script>
+    document.getElementById("resetPasswordForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+        validatePassword();
+    });
+
+    function validatePassword() {
+        const passwordInput = document.getElementById("passwordInput");
+        const rePasswordInput = document.getElementById("rePasswordInput");
+        const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordPattern.test(passwordInput.value)) {
+            // Password does not meet the regex pattern
+            passwordInput.classList.add("is-invalid");
+            passwordInput.nextElementSibling.textContent = "Password must contain at least one letter, one number, and be at least 8 characters long.";
+        } else if (passwordInput.value !== rePasswordInput.value) {
+            // Password and re-password do not match
+            passwordInput.classList.remove("is-invalid");
+            rePasswordInput.classList.add("is-invalid");
+            rePasswordInput.nextElementSibling.textContent = "Passwords do not match.";
+        } else {
+            // Password and re-password are valid, submit the form
+            passwordInput.classList.remove("is-invalid");
+            rePasswordInput.classList.remove("is-invalid");
+            document.getElementById("resetPasswordForm").submit();
+        }
+    }
+
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const showPasswordBtn = document.getElementById(`show${inputId.charAt(0).toUpperCase() + inputId.slice(1)}Btn`);
+        const showPasswordIcon = document.getElementById(`show${inputId.charAt(0).toUpperCase() + inputId.slice(1)}Icon`);
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            showPasswordIcon.classList.remove("fa-eye");
+            showPasswordIcon.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            showPasswordIcon.classList.remove("fa-eye-slash");
+            showPasswordIcon.classList.add("fa-eye");
+        }
+    }
+</script>

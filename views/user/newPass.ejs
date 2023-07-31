@@ -1,0 +1,82 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+
+<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <h2 class="text-center mb-5" style="color: black;">ENTER NEW PASSWORD</h2>
+          <div class="card" style="border-radius: 15px; background-color: black;">
+            <div class="card-body p-5">
+
+              <form action="/profile/newPassword" method="post" id="newPasswordForm">
+                <!-- New password input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="password" style="color: white;">New Password</label>
+                  <div class="input-group position-relative">
+                    <input type="password" class="form-control" name="password" id="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$" />
+                    <div class="input-group-append">
+                      <span class="input-group-text show-password-icon" onclick="togglePasswordVisibility('password')">
+                        <i class="fas fa-eye-slash"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <small class="form-text text-muted">Password must be at least 8 characters long and contain at least one letter and one digit.</small>
+                </div>
+
+                <!-- Confirm password input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="confirm-password" style="color: white;">Confirm Password</label>
+                  <div class="input-group position-relative">
+                    <input type="password" class="form-control" name="confirm-password" id="confirm-password" required />
+                    <div class="input-group-append">
+                      <span class="input-group-text show-password-icon" onclick="togglePasswordVisibility('confirm-password')">
+                        <i class="fas fa-eye-slash"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <small id="password-error" class="form-text text-danger d-none">Passwords do not match.</small>
+                </div>
+
+                <!-- Submit button -->
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary align-items-center">Update</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function togglePasswordVisibility(inputId) {
+    const passwordInput = document.getElementById(inputId);
+    const showPasswordIcon = passwordInput.parentElement.nextElementSibling.querySelector('.show-password-icon');
+
+    if (passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      showPasswordIcon.innerHTML = '<i class="fas fa-eye"></i>';
+    } else {
+      passwordInput.type = 'password';
+      showPasswordIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
+    }
+  }
+
+  const newPasswordForm = document.getElementById('newPasswordForm');
+  const passwordInput = document.getElementById('password');
+  const confirmPasswordInput = document.getElementById('confirm-password');
+  const passwordError = document.getElementById('password-error');
+
+  newPasswordForm.addEventListener('submit', function(event) {
+    if (passwordInput.value !== confirmPasswordInput.value) {
+      event.preventDefault();
+      passwordError.classList.remove('d-none');
+    }
+  });
+</script>
+
+<%- include("../layout/simpleLayout/footer.ejs") %>

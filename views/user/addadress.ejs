@@ -1,0 +1,48 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+<div class="col-lg-8 col-12 d-flex justify-content-center">
+    <div class="card mt-4">
+        <div class="card-header bg-light py-4">
+            <h4 class="mb-0">Contact Address</h4>
+            <p class="mb-0">We can contact you here</p>
+        </div>
+        <div class="card-body">
+            <form action="/profile/addnewadress" method="post">
+                <div class="form-group ">
+                    <label for="building">Building Name</label>
+                    <input type="text" class="form-control" id="building" name="building" required>
+                </div>
+                <div class="form-group">
+                    <label for="street">Street</label>
+                    <input type="text" class="form-control" id="street" name="street" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-5">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="inputCity" name="city" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputState">State</label>
+                        <input type="text" class="form-control" id="inputState" name="state" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="inputZip">Zip</label>
+                        <input type="text" class="form-control" id="inputZip" name="zipcode" pattern="^\d{6}$" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" class="form-control" id="phone" name="phone" pattern="^\d{10}$" required>
+                </div>
+                <input type="hidden" class="form-control" id="type" name="type" value="<%=type%>"  required>
+
+                <div class="d-flex justify-content-between align-items-center pt-2">
+                    <button type="submit" class="btn btn-primary">Add Address</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

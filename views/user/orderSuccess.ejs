@@ -1,0 +1,128 @@
+
+<%- include("../layout/simpleLayout/header.ejs") %>
+
+
+
+
+
+
+
+<div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">WIZZ</span>TECH</h1>
+                <div class="invoice p-5">
+                    <h5>Your Order Confirmed!</h5>
+                    <span class="font-weight-bold d-block mt-4">Hy  <%= user.fullname %></span>
+                    <span>Your order has been confirmed and will be shipped in the next two days!</span>
+                    <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="py-2">
+                                            <span class="d-block text-muted">Order Date</span>
+                                            <span><%= order.order_date.toLocaleDateString('en-US', { 
+                                                month: 'long', 
+                                                day: 'numeric',
+                                                year: 'numeric',}) %></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="py-2">
+                                            <span class="d-block text-muted">Order ID</span>
+                                            <span><%= order._id.toString().substring(0,6) %></span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <!-- Payment info (if applicable) -->
+                                    </td>
+                                    <td>
+                                        <div class="py-2">
+                                            <span class="d-block text-muted">Shipping Address</span>
+                                           
+                                            <span><%= address. phoneNumber%></span><br>
+                                            <span><%= address.buildingName %>,</span><br>
+                                            <span><%= address.city %>,</span><br>
+                                            <span><%= address.state %>, <%= address.country %></span><br>
+                                            <span>PIn:<%= address.zipCode %></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="product border-bottom table-responsive">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <% product.items.forEach((item)=>{  %>
+                                <tr>
+                                    <!-- Product details (if applicable) -->
+                                    <td width="20%">
+                                        <img src="<%= item.product.image[0].url %>" width="90">
+                                    </td>
+                                    <td width="60%">
+                                        <span class="font-weight-bold"><%= item.product.name %></span>
+                                        <div class="product-qty">
+                                            <span class="d-block">quantity: <%= item.quantity %></span>
+                                            <span>Color: <%= item.product.color %></span>
+                                        </div>
+                                    </td>
+                                    <td width="20%">
+                                        <div class="text-right">
+                                            <span class="d-block font-weight-bold">Product Price</span>
+                                            <span class="font-weight-bold">&#8377;<%= (item.product.price * item.quantity).toFixed(2) %></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row d-flex justify-content-end">
+                        <div class="col-md-5">
+                            <table class="table table-borderless">
+                                <tbody class="totals">
+                                    <tr class="border-top border-bottom">
+                                        <td>
+                                            <!-- <div class="text-left">
+                                                <span class="font-weight-bold">s </span>
+                                                </div> -->
+                                                <div class="text-left">
+                                                <span class="font-weight-bold">Coupon </span>
+                                                </div>
+                                                <div>   
+                                                <span class="font-weight-bold">Total</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <!-- <% product.items.forEach((item)=>{  %>
+                                            <div class="text-right">
+                                                <span class="font-weight-bold">$<%= (item.product.price * item.quantity).toFixed(2) %></span>
+                                                <% }) %> -->
+                                            </div>
+                                                <div class="text-right">
+                                                <span class="font-weight-bold">&#8377; <% if(coupon != null){ %> <%= coupon.discount %> <%} else {%> 0 <% } %></span>
+                                               </div>
+                                                <div class="text-right">
+                                                <span class="font-weight-bold">&#8377;<%= order.price.toFixed(2) %></span>
+                                            </div>
+                                        </td>
+                                       
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p class="font-weight-bold mb-0">Thanks for shopping with us!</p>
+                    <span>WIZZ TECH</span>
+                </div>
+                <div class="d-flex justify-content-between footer p-3">
+                    <span>WIZZ TECH <a href="/shop">Continue Shopping</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<%- include("../layout/simpleLayout/footer.ejs") %>
