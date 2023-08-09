@@ -69,7 +69,7 @@
                 <div class="form-group-inline">
                     <div class="form-group">
                         <label for="images">Product Images:</label>
-                        <input type="file" class="form-control" id="images" name="images" multiple required>
+                        <input type="file" class="form-control" id="images" name="images" multiple  accept="image/*"  required>
                     </div>
                     <div class="form-group">
                         <label for="name">Product Name:</label>
@@ -112,7 +112,7 @@
                 </div>
                     <div class="form-group">
                         <label for="images">Cover Image:</label>
-                        <input type="file" class="form-control" id="coverimage" name="coverimage"  required>
+                        <input type="file" class="form-control" id="coverimage" name="coverimage"  accept="image/*"   required>
                     </div>
                 </div>
     
@@ -143,6 +143,39 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fetch@3.6.2/dist/fetch.min.js"></script>
     <script>
+
+
+function isValidImage(file) {
+    const allowedExtensions = ["jpg", "jpeg", "png", "gif"];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    const maxSizeInBytes = 5 * 1024 * 1024; // 5MB
+
+    return allowedExtensions.includes(fileExtension) && file.size <= maxSizeInBytes;
+  }
+
+  // Function to handle image input change event
+  function handleImageInputChange(event) {
+    const input = event.target;
+
+    for (const file of input.files) {
+      if (!isValidImage(file)) {
+        // Show SweetAlert error message
+        Swal.fire({
+          icon: 'error',
+          title: 'Invalid Image',
+          text: 'Allowed formats are JPG, JPEG, PNG, and GIF (up to 5MB).',
+          confirmButtonColor: 'goldenrod'
+        });
+
+        input.value = ""; // Reset the input value to clear the invalid selection
+        return;
+      }
+    }
+  }
+  // Add event listener to image input fields
+  document.getElementById('images').addEventListener('change', handleImageInputChange);
+  document.getElementById('coverimage').addEventListener('change', handleImageInputChange);
+
         document.getElementById('addProductForm').addEventListener('submit', function(event) {
           event.preventDefault();
       

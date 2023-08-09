@@ -97,7 +97,7 @@
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Coupon</h6>
-                            <h6 class=" couponShow">$0</h6>
+                            <h6 class=" couponShow">&#8377;0</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Shipping</h6>
@@ -225,9 +225,9 @@ couponForm.addEventListener('submit',(e)=>{
             icon: "warning",
             title: "Invalid coupon",
             })
-            document.querySelector('.couponShow').innerHTML= `$${0}`;
+            document.querySelector('.couponShow').innerHTML= `&#8377;${0}`;
             document.querySelector('.couponShow').removeAttribute("id");
-            document.getElementById('totalprice').innerHTML= `$${'<%= cart.cartPrice.toFixed(2) %>'}`;
+            document.getElementById('totalprice').innerHTML= `&#8377;${'<%= cart.cartPrice.toFixed(2) %>'}`;
         }else if(result.data.response == "min"){
 
             Swal.fire({
@@ -235,12 +235,24 @@ couponForm.addEventListener('submit',(e)=>{
                 title: "You can't apply this coupon",
             })
 
-        }else{
-            
-            document.querySelector('.couponShow').innerHTML= `$${result.data.coupon.discount}`;
-            document.querySelector('.couponShow').setAttribute("id",result.data.coupon._id);
-            document.getElementById('totalprice').innerHTML= `$${('<%= cart.cartPrice %>'- result.data.coupon.discount).toFixed(2)}`;
-        }
+        }else {
+    const couponDiscount = result.data.coupon.discount;
+    const cartPrice = parseFloat('<%= cart.cartPrice %>');
+
+    if (couponDiscount > cartPrice) {
+        document.querySelector('.couponShow').innerHTML = `&#8377;${cartPrice.toFixed(2)}`;
+        document.querySelector('.couponShow').setAttribute("id", result.data.coupon._id);
+        document.getElementById('totalprice').innerHTML = '&#8377;0'; // Set total price to zero
+    } else {
+        document.querySelector('.couponShow').innerHTML = `&#8377;${couponDiscount}`;
+        document.querySelector('.couponShow').setAttribute("id", result.data.coupon._id);
+        const newTotalPrice = (cartPrice - couponDiscount).toFixed(2);
+        document.getElementById('totalprice').innerHTML = `&#8377;${newTotalPrice}`;
+    }
+}
+
+
+
     })
 })
 
@@ -255,7 +267,7 @@ function handleOnlinePayment(){
                 url: "/razorpay",
                 type: "POST",
                 data: {
-                    coupon: couponId
+                    couponID: couponId
                 },
                 success: function(res){
                     if(res.success){
@@ -275,7 +287,7 @@ function handleOnlinePayment(){
                                         payment: payment,
                                         address: addressId,
                                         payment_id: response.razorpay_payment_id,
-                                        coupon: couponId,
+                                        couponID: couponId,
                                     }
                                 })
                                 .then((result)=>{
@@ -323,13 +335,21 @@ function placeorder(){
                 data: {
                     payment: payment,
                     address: addressId,
-                    coupon: couponId,
+                    couponID: couponId,
                 }
                 
                 })
                 .then((result)=>{
                     if(result.data.response){
                         location.href=`/order/success?orderId=${result.data.orderId}`;
+                        return
+                    }
+                    if(result.data.wallet == "false" || result.data.wallet == "noprice"){
+                        Swal.fire({
+                            icon: "warning",
+                            title: "you dont have enough balance",
+                        })
+
                     }
                 })
             }

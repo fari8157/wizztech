@@ -9,6 +9,8 @@ const checkoutAddress=require('../controller/user/orderController')
 const order=require('../controller/user/orderItems')
 const couponApply=require('../controller/user/coupon')
 const categoryC=require("../controller/user/category")
+const wallet=require("../controller/user/walletController")
+const wishlist=require("../controller/user/wishlist")
 /// login&signup...//
 routers.get("/login",adminAuth.isLogout,userAuth.isLogout,authcontroller.loginLoad)
 routers.post("/login",authcontroller.verifyLogin)
@@ -64,11 +66,19 @@ routers.post('/checkout/couponApply',couponApply.applyCoupon)
 routers.get('/order/success',checkoutAddress.loadOrderSuccessPage)
 
 
- routers.get("/order",order.loadorder)
+ routers.get("/order",userAuth.isLogin,order.loadorder)
+ routers.get('/order/details',userAuth.isLogin,userAuth.isLogin,order.loadOrderDetails);
+ routers.post('/order/cancel',order.cancelOrder);
+ routers.post('/order/return',order.orderReturn);
+
+ routers.get('/wallet',userAuth.isLogin,wallet.loadWallet);
+
+
  routers.get("/addAddress",home.loadAddAddress)
- routers.get("/wishlist",home.loadWishlist)
+//  routers.get("/wishlist",home.loadWishlist)
 
-
+ routers.get('/wishlist',wishlist.loadWishlist);
+ routers.get('/addToWishlist',wishlist.addToWishlist);
 
 
 

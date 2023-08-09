@@ -1,6 +1,6 @@
 <%-include("../layout/adminLayout/header.ejs") %>
 <main id="main" class="main">
-<div style="overflow-y: auto;" class="w-100 d-flex align-items-center align-items-center">
+  <div style="overflow-y: auto;" class="w-100 d-flex align-items-center align-items-center">
 
     <div class="col-lg-12">
         <div class="card mt-4">
@@ -21,7 +21,7 @@
                                     <span>
                                         <h5 class="mb-0 text-center" style="display: inline;">Order Placed By </h5><br>
                                         <h6 class="text-primary" style="display: inline;">
-                                            <%= user.fullname%>
+                                            <%= user.username %>
                                         </h6>
                                     </span><br>
                                     <p class="mb-0 px-0"
@@ -40,12 +40,13 @@
                                                     <%}%>" id="orderStatus"><small>
                                                             <%=order.order_status%>
                                                         </small></a>
-                                <%if(order.order_status=="pending"){%>
+                                <%if(order.order_status != "rejected" && order.order_status != "cancelled" && order.order_status != "delivered"){%>
                                     <br>
                                     <select class="form-select col-8 mt-2" id="status-select">
-                                        <option selected>None</option>
-                                        <option value="shipped">Shipped</option>
-                                        <option value="rejected">Reject</option>
+                                        <option <% if(order.order_status === "pending") { %> selected <% } %> value="pending"> Pending</option>
+                                        <option <% if(order.order_status === "rejected") { %> selected <% } %> value="rejected"> Reject</option>
+                                        <option <% if(order.order_status === "shipped") { %> selected <% } %> value="shipped"> Shipped</option>
+                                        <option <% if(order.order_status === "delivered") { %> selected <% } %> value="delivered"> Delivered</option>
                                     </select>
                                     <%}%>
                             </div>
@@ -91,7 +92,7 @@
                                     </td>
                                     <td class="text-center" style="font-size: 1.2vw;">
                                         <b href="#" class="text-dark ">
-                                            <%=products[i].product.name %>
+                                            <%=products[i].product.productName %>
                                         </b>
                                     </td>
                                     <td class="text-center text-dark" style="font-size: 1vw;">
@@ -101,12 +102,19 @@
                                     </td>
                                     <td id="totalPrice"
                                         class="product-subtotal text-center" style="font-size: 1vw;">
-                                        <span>$<%=(products[i].quantity * products[i].product.price).toFixed(2) %></span>
+                                        <span>&#8377;<%=(products[i].quantity * products[i].product.price).toFixed(2) %></span>
                                     </td>
                                 </tr>
                                 <% } %>
                         </tbody>
                     </table>
+
+                    <div class="col-12 d-flex justify-content-end">
+                        <div class="d-flex flex-column w-25">
+                            <kbd class="bg-warning text-dark font-weight-bolder d-flex justify-content-between">Coupon: <span>&#8377;<% if(coupon){ %><%= coupon.discount %><% }else{ %>0<% } %>.00</span></kbd>
+                            <kbd class="font-weight-bolder mt-2 d-flex justify-content-between">Total: <span>&#8377;<%= order.price.toFixed(2) %></span></kbd>
+                        </div>
+                    </div>
                 </div>
               </div>
               <div class="card m-3">
@@ -115,10 +123,10 @@
                 </div>
                 <div class="card-body">
 
-                    <%=address.phoneNumber%>,<br>
+                  PH:  <%=address.phoneNumber%>,<br>
                     <%=address.buildingName%>,<%=address.street%>,<%=address.city%>,<br>
-                    <%=address.state%>,<%=address.country%>,
-                    <%=address.pincode%>,
+                    <%=address.state%>,<%=address.country%>,<br>
+                 PIN:   <%=address.zipCode%>
 
                 </div>
               </div>
@@ -128,6 +136,8 @@
                 </div>
                 <div class="card-body">
                     <% if(order.payment_method == "cod"){ %> Cash On Delivery <% } %>
+                    <% if(order.payment_method == "online"){ %> Online Payment <br><span style="font-weight:bold;">RAZORPAY_ID:</span><span style="color: rgb(204, 24, 24);"><%=order. razorpay_order_id%></span> <% } %>
+                    <% if(order.payment_method == "wallet"){ %> Wallet Payment <% } %>
                 </div>
               </div>
           </div>
@@ -153,26 +163,5 @@
                 });
             });
           </script>
-    </div >
-
-</main>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
-                <script>
-                    document.getElementById('status-select').addEventListener('change', function(event) {
-                      const status= event.target.value;
-                      let id='<%= order._id %>'
-                      console.log(status)
-                      let order = axios({
-                            method: "post",
-                            url: `/admin/order/status`,
-                            data: {
-                                id,status
-                            },
-                        }).then((data) => {
-                            document.getElementById("orderStatus").innerHTML = `${data.status}`;
-                            location.reload();
-            
-                        });
-                    });
-                  </script>
+</div >
 <%- include("../layout/adminLayout/footer.ejs") %>

@@ -1,0 +1,104 @@
+
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+
+  function decrementQuantity(productId, userId){
+      
+      $.ajax({
+          type: "GET",
+          url: "/decrementQuantity",
+          data: {
+              userId: userId,
+              productId: productId,
+          },
+          success: function(res){
+              if(res.response){
+                  
+                  $.get(location.href, function(data) {
+                      $(`#${productId}`).html($(data).find(`#${productId}`).html());
+                      $("#carttotal").html($(data).find("#carttotal").html());
+                      $("#subtotal").html($(data).find("#subtotal").html());
+                  });
+              }
+          }
+      })
+  }
+
+  function incrementQuantity(productId, userId){
+      
+      $.ajax({
+          type: "GET",
+          url: "/incrementQuantity",
+          data: {
+              userId: userId,
+              productId: productId,
+          },
+          success: function(res){
+              if(res.response){
+                  
+                  $.get(location.href, function(data) {
+                      $(`#${productId}`).html($(data).find(`#${productId}`).html());
+                      $("#carttotal").html($(data).find("#carttotal").html());
+                      $("#subtotal").html($(data).find("#subtotal").html());
+                  });
+              }
+          }
+      })
+
+  }
+
+  function removeItem(productId){
+    
+      $.ajax({
+          type: "GET",
+          url: "/addToWishlist",
+          data: {
+              productId: productId,
+          },
+          success: function(res){
+                  
+              $.get(location.href, function(data) {
+                  $("#row").html($(data).find("#row").html());
+                  $("#wishlist").html($(data).find("#wishlist").html());
+                  $("#cart").html($(data).find("#cart").html());
+              });
+              
+          }
+      })
+  }
+
+  function addToClick(id){
+      
+      axios.get(`/addCart?productId=${id}`)
+      .then((result)=>{
+          if(result.data.response){
+              Swal.fire("Added!", "product has added to cart.", "success").then((response) => {
+                  removeItem(id)
+              })
+
+              
+          }else{
+              let x = document.getElementById("snackbar-error");
+              x.className = "show";
+              setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+          }
+          
+      })
+          
+  }
+
+
+</script>
+<!-- <script src="/sidebar/js/jquery.min.js"></script>-->
+<script src="/sidebar/js/popper.js"></script>
+<script src="sidebar/js/bootstrap.min.js"></script>
+<script src="/sidebar/js/main.js"></script> 
+</body>
+</html>

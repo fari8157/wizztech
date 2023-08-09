@@ -1,5 +1,352 @@
-<%- include("../layout/userLayout/header.ejs") %>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <title>WIZZ TECH</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a19edc713a.js" crossorigin="anonymous"></script>
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.1/nouislider.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.1/nouislider.min.js"></script>
+   
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+
+
+    <style>
+        #snackbar,
+        #snackbar-error {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            border-radius: 15px;
+        }
+
+        #snackbar.show,
+        #snackbar-error.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 0;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 0;
+                opacity: 0;
+            }
+        }
+
+        .swal-confirm-button {
+            background-color: gold !important;
+        }
+
+        .swal-cancel-button {
+            background-color: red !important;
+        }
+       
+ 
+
+ .slider-container {
+   position: relative;
+ }
+ 
+ .slider {
+   -webkit-appearance: none;
+   width: 100%;
+   height: 10px;
+   /* border-radius: 10px; */
+   background: linear-gradient(to right, #007bff, #ddd);
+   outline: none;
+   opacity: 0.7;
+   -webkit-transition: .2s;
+   transition: opacity .2s;
+   position: absolute;
+   z-index: 1;
+ }
+ 
+ .slider.min-price {
+   top: 0;
+ }
+ 
+ .slider.max-price {
+   bottom: 0;
+ }
+ 
+ .slider-track {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 5;
+   right: 0;
+   background: #007bff;
+   border-radius: 10px;
+   z-index: 0;
+ }
+ 
+ .range-values {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+   padding-top: 10px;
+   font-weight: bold;
+   font-size: 14px;
+ }
+ 
+ .range-values span {
+   color: #555;
+ }
+ 
+ .range-values span:nth-child(2) {
+   color: #007bff;
+ }
+ 
+ 
+ 
+ 
+ 
+   
+ </style>
+ 
+ <!-- ... rest of your code ... -->
+ 
+    
+</head>
+
+<body>
+
+    
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+        <div class="row bg-secondary py-1 px-xl-5">
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="d-inline-flex align-items-center h-100">
+                    <a class="text-body mr-3" href="">About</a>
+                    <a class="text-body mr-3" href="">Contact</a>
+                    <a class="text-body mr-3" href="">Help</a>
+                    <a class="text-body mr-3" href="">FAQs</a>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center">
+                    <div class="btn-group">
+                        <% if (userId) { %>
+                            <!-- User is logged in -->
+                            <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">
+                                <%=user.fullname %>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+                            <% } else { %>
+                                <!-- User is not logged in -->
+                                <button type="button" class="btn btn-sm btn-light dropdown-toggle"
+                                    data-toggle="dropdown">My Account</button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="/login">Sign in</a>
+                                    <a class="dropdown-item" href="/register">Sign up</a>
+                                </div>
+                                <% } %>
+                    </div>
+
+
+                </div>
+                <div class="d-inline-flex align-items-center d-block">
+                    <% if (userId) { %>
+                        <a href="/cart" class="btn px-0 ml-2">
+                            <i class="fas fa-heart text-dark"></i>
+                            <span class="badge text-dark border border-dark rounded-circle"
+                                style="padding-bottom: 2px; "><%= wishlist && wishlist.items ? wishlist.items.length : 0 %></span>
+                        </a>
+                        <a href="/cart" class="btn px-0 ml-2">
+                            <i class="fas fa-shopping-cart text-dark"></i>
+                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">
+                                <%= cart ? cart.items.length : 0 %>
+                            </span>
+                        </a>
+                        <% } else { %>
+                            <button class="btn btn-primary px-3" style="display: none;">Heart Icon</button>
+                            <button class="btn btn-primary px-3" style="display: none;">Cart Icon</button>
+                            <% } %>
+                </div>
+
+            </div>
+        </div>
+        <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+            <div class="col-lg-4">
+                <a href="" class="text-decoration-none">
+                    <span class="h1 text-uppercase text-primary bg-dark px-2">WIZZ</span>
+                    <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">TECH</span>
+                </a>
+            </div>
+            <div class="col-lg-4 col-6 text-left">
+                <form >
+                    <div class="input-group">
+                        <input type="text" class="form-control" value="<%= search %>" id="searchInput" placeholder="Search for products">
+                        <div class="input-group-append">
+                            <span class="input-group-text bg-transparent text-primary" onclick="searchProducts()">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid bg-dark mb-30">
+        <div class="row px-xl-5">
+            <div class="col-lg-3 d-none d-lg-block">
+                <a class="btn d-flex align-items-center justify-content-between bg-primary w-100" data-toggle="collapse"
+                    href="#navbar-vertical" style="height: 65px; padding: 0 30px;">
+                    <h6 class="text-dark m-0"><i class="fa fa-bars mr-2"></i>Categories</h6>
+                    <i class="fa fa-angle-down text-dark"></i>
+                </a>
+                <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+                    id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999;">
+                    <div class="navbar-nav w-100">
+                        <% category.forEach((category) => { %>
+                            <div  onclick="category('<%=category.name%>')" class="nav-item nav-link">
+                              <%= category.name %>
+                            </div>
+                          <% }) %>
+
+
+                    </div>
+                    
+                </nav>
+            </div>
+            <div class="col-lg-9">
+                <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+                    <a href="" class="text-decoration-none d-block d-lg-none">
+                        <span class="h1 text-uppercase text-dark bg-light px-2">WIZZ</span>
+                        <span class="h1 text-uppercase text-light bg-primary px-2 ml-n1">TECH</span>
+
+                    </a>
+                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                        <div class="navbar-nav mr-auto py-0">
+                            <a href="/" class="nav-item nav-link ">Home</a>
+                            <a href="/shop" class="nav-item nav-link">Shop</a>
+
+                            <a href="/profile" class="nav-item nav-link">Profile</a>
+
+
+                        </div>
+                       
+                        <!-- <div class="d-inline-flex align-items-center ">
+                                <a href="" class="btn px-0 ml-2">
+                                    <i class="fas fa-heart text-dark"></i>
+                                    <span class="badge text-dark border border-dark rounded-circle"
+                                        style="padding-bottom: 2px;">0</span>
+                                </a>
+                                <a href="" class="btn px-0 ml-2">
+                                    <i class="fas fa-shopping-cart text-dark"></i>
+                                    <span class="badge text-dark border border-dark rounded-circle"
+                                        style="padding-bottom: 2px;">0</span>
+                                </a>
+                                                                 
+                        </div>
+                       -->
+                    </div>
+
+
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+
+
+
+
+  
+    
+   
     <!-- Breadcrumb Start -->
     <div class="container-fluid">
         <div class="row px-xl-5">
@@ -23,51 +370,63 @@
                 <!-- Price Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by price</span></h5>
                 <div class="bg-light p-4 mb-30">
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" checked id="price-all">
+                    <form >
+                        <!-- <div class="custom-control pricex custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox"  class="custom-control-input" checked id="price-all" >
                             <label class="custom-control-label" for="price-all">All Price</label>
                             <span class="badge border font-weight-normal">1000</span>
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-1">
-                            <label class="custom-control-label" for="price-1">&#8377;0 - &#8377;100</label>
+                        <div class="custom-control pricex custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="priceForm" class="custom-control-input price" id="price-1">
+                            <label class="custom-control-label" for="price-1" >&#8377;0 - &#8377;100</label>
                             <span class="badge border font-weight-normal">150</span>
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-2">
-                            <label class="custom-control-label" for="price-2">&#8377;100 - &#8377;200</label>
+                        <div class="custom-control pricex custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="priceForm" class="custom-control-input price" id="price-2">
+                            <label class="custom-control-label" for="price-2" >&#8377;100 - &#8377;200</label>
                             <span class="badge border font-weight-normal">295</span>
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-3">
-                            <label class="custom-control-label" for="price-3">&#8377;200 - &#8377;300</label>
+                        <div class="custom-control pricex custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="priceForm" class="custom-control-input price" id="price-3">
+                            <label class="custom-control-label" for="price-3" >&#8377;200 - &#8377;300</label>
                             <span class="badge border font-weight-normal">246</span>
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-                            <input type="checkbox" class="custom-control-input" id="price-4">
-                            <label class="custom-control-label" for="price-4">&#8377;300 - &#8377;400</label>
+                        <div class="custom-control pricex custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" name="priceForm" class="custom-control-input price" id="price-4">
+                            <label class="custom-control-label" for="price-4" >&#8377;300 - &#8377;400</label>
                             <span class="badge border font-weight-normal">145</span>
                         </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-                            <input type="checkbox" class="custom-control-input" id="price-5">
-                            <label class="custom-control-label" for="price-5">&#8377;400 - &#8377;500</label>
+                        <div class="custom-control pricex custom-checkbox d-flex align-items-center justify-content-between">
+                            <input type="checkbox" name="priceForm" class="custom-control-input price" id="price-5">
+                            <label class="custom-control-label" for="price-5" >&#8377;400 - &#8377;500</label>
                             <span class="badge border font-weight-normal">168</span>
-                        </div>
+                        </div> -->
+                        <div class="price-range-slider">
+                            <div class="slider-container">
+                              <input type="range" min="0" max="5000" value="<%= minamount %>" step="1" class="slider min-price" id="minPriceRange">
+                              <input type="range" min="0" max="5000" value="<%= maxamount %>" step="1" class="slider max-price" id="maxPriceRange">
+                              <div class="slider-track"></div>
+                            </div>
+                            <span class="range-values">
+                              <span>$<span id="minValue">0</span></span>
+                              <span>$<span id="maxValue">2000</span></span>
+                            </span>
+                          </div>
+                          
                     </form>
                 </div>
                 <!-- Price End -->
                 
                 <!-- Color Start -->
-                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
+                <!-- <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Filter by color</span></h5>
                 <div class="bg-light p-4 mb-30">
-                    <form>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                    <form id="color"> -->
+                        <!-- <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" checked id="color-all">
                             <label class="custom-control-label" for="price-all">All Color</label>
                             <span class="badge border font-weight-normal">1000</span>
-                        </div>
-                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        </div> -->
+                        <!-- <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                             <input type="checkbox" class="custom-control-input" id="color-1">
                             <label class="custom-control-label" for="color-1">Black</label>
                             <span class="badge border font-weight-normal">150</span>
@@ -93,13 +452,13 @@
                             <span class="badge border font-weight-normal">168</span>
                         </div>
                     </form>
-                </div>
+                </div> -->
                 <!-- Color End -->
 
                 <!-- Size Start -->
                 <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3"></span></h5>
-                <div class="bg-light p-4 mb-30">
-                    
+                <div class="bg-light p-4 mb-30 d-flex justify-content-center">
+                    <button onclick="searchProducts()" style="box-shadow: none;" class="btn btn-danger rounded">Apply</button>
                 </div>
                 <!-- Size End -->
             </div>
@@ -131,7 +490,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4">
                             <div class="product-img position-relative overflow-hidden">
-                                <img class="img-fluid w-100" src="<%=product.image[0].url%>" alt="">
+                                <img class="img-fluid w-100" src="<%=product.coverImage.url%>" alt="">
                                 <div class="product-action">
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
                                     <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
@@ -160,13 +519,39 @@
                    
                     <div class="col-12">
                         <nav>
-                          <ul class="pagination justify-content-center">
-                            <li class="page-item disabled"><a class="page-link" href="#">Previous</span></a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                          </ul>
+                            <ul class="pagination justify-content-center">
+                                <% if (hasPrevPage) { %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/shop?page=<%= prevPage %>">Previous</a>
+                                    </li>
+                                <% } else { %>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">Previous</a>
+                                    </li>
+                                <% } %>
+                                
+                                <% for (let page = 1; page <= lastPage; page++) { %>
+                                    <% if (page === currentPage) { %>
+                                        <li class="page-item active">
+                                            <a class="page-link" href="#"><%= page %></a>
+                                        </li>
+                                    <% } else { %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/shop?page=<%= page %>"><%= page %></a>
+                                        </li>
+                                    <% } %>
+                                <% } %>
+                                
+                                <% if (hasNextPage) { %>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/shop?page=<%= nextPage %>">Next</a>
+                                    </li>
+                                <% } else { %>
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                <% } %>
+                            </ul>
                         </nav>
                     </div>
                 </div>
@@ -175,6 +560,79 @@
         </div>
     </div>
     <!-- Shop End -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <script>
+
+        const minPriceRange = document.getElementById('minPriceRange');
+        const maxPriceRange = document.getElementById('maxPriceRange');
+        const minValue = document.getElementById('minValue');
+        const maxValue = document.getElementById('maxValue');
+
+        function updateValues() {
+        minValue.textContent = minPriceRange.value;
+        maxValue.textContent = maxPriceRange.value;
+        }
+
+        minPriceRange.addEventListener('input', function() {
+        if (parseInt(minPriceRange.value) > parseInt(maxPriceRange.value)) {
+            minPriceRange.value = maxPriceRange.value;
+        }
+        updateValues();
+        });
+
+        maxPriceRange.addEventListener('input', function() {
+        if (parseInt(maxPriceRange.value) < parseInt(minPriceRange.value)) {
+            maxPriceRange.value = minPriceRange.value;
+        }
+        updateValues();
+        });
+
+
+    function searchProducts() {
+        // const searchInput = document.getElementById('searchInput').value;
+
+        const searchInput = $("#searchInput").val();
+        const minamount = $("#minPriceRange").val();
+        const maxamount = $("#maxPriceRange").val();
+
+        if(location.pathname == "/category"){
+
+            const query = new URLSearchParams(location.search);
+            const category = query.get('id') 
+            location.href = `/category?id=${category}&search=${searchInput}&minamount=${minamount}&maxamount=${maxamount}`;
+
+        }else{
+
+            location.href = `/shop?search=${searchInput}&minamount=${minamount}&maxamount=${maxamount}`;
+
+        }
+
+        
+    }
+    function category(category) {
+        // const searchInput = document.getElementById('searchInput').value;
+
+        const searchInput = $("#searchInput").val();
+        const minamount = $("#minPriceRange").val();
+        const maxamount = $("#maxPriceRange").val();
+
+
+        // location.href = `/shop?search=${searchInput}`;
+        
+        location.href = `/category?id=${category}&search=${searchInput}&minamount=${minamount}&maxamount=${maxamount}`;
+    }
+
+    
+
+   
+    // function 
+    
+
+    
+    </script>
 
 
     <%- include("../layout/userLayout/footer.ejs") %>

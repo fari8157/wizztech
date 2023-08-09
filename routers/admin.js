@@ -2,12 +2,17 @@ const category=require("../controller/adminControler/category")
 const customer=require("../controller/adminControler/customer")
 const adminHome=require("../controller/adminControler/home")
 const product = require("../controller/adminControler/product");
+const login=require("../controller/adminControler/authcontroller")
 const adminAuth = require('../middleware/admin');
 const adminControler=require("../controller/adminControler/adminController");
 const order=require('../controller/adminControler/order')
 const coupon=require('../controller/adminControler/coupon')
 const express=require("express")
 const routers=express.Router()
+
+
+routers.get("/login",login.loadlogin)
+routers.post("/login",login.verify)
 
 routers.get('/category',adminAuth.isLogin,category.loadCategory)
 // routers.post('/categorires',category.loadCategory)

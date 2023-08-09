@@ -5,6 +5,9 @@ const { randomUUID } = require('crypto');
 
 const imageUpload = async (file)=>{
     try{
+        if (!file || !file.mimetype.startsWith('image/')) {
+            throw new Error('Invalid file type. Only images are allowed.');
+        }
 
         const result = await cloudinary.uploader.upload(file.tempFilePath,{
             public_id: `${randomUUID()}`,

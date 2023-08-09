@@ -160,23 +160,28 @@
     </div>
 
 
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- axios cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
 
 
     <script>
-        const form = document.getElementById('form');
-        
-        const name = document.getElementById('name')
-        const discount = document.getElementById('discount');
-        const expiryDate = document.getElementById('expiryDate');
-        const minAmount = document.getElementById('minAmount');
+    const form = document.getElementById('form');
+    const name = document.getElementById('name')
+    const discount = document.getElementById('discount');
+    const expiryDate = document.getElementById('expiryDate');
+    const minAmount = document.getElementById('minAmount');
 
-        form.addEventListener('submit',(e)=>{
-            e.preventDefault();
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
 
-
+        if (Number(discount.value) > Number(minAmount.value)) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Discount cannot be greater than Minimum Amount',
+            });
+        } else {
             axios({
                 method: "post",
                 url: "/admin/coupon/addCoupon",
@@ -187,19 +192,18 @@
                     minimumAmount: minAmount.value,
                 }
             })
-            .then((result)=>{
-                if(result.data.response){
-                    location.href= "/admin/coupon"
-                }else{
+            .then((result) => {
+                if (result.data.response) {
+                    location.href = "/admin/coupon";
+                } else {
                     let x = document.getElementById("snackbar-error");
                     x.className = "show";
-                    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+                    setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
                 }
-            })
-
-        })
-        
-    </script>
+            });
+        }
+    });
+</script>
 
     <script>
         // Get the current date and format it as "YYYY-MM-DD" to match the input date format

@@ -1,0 +1,80 @@
+<%- include("../layout/simpleLayout/header.ejs") %>
+<section>
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <h2 class="text-center mb-5" style="color: rgb(14, 13, 13);">Admin Login</h2>
+          <div class="card" style="border-radius: 15px; background-color:rgb(14, 13, 13); color: white;">
+            <div class="card-body p-5">
+
+              <form action="/admin/login" method="post">
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="email">Email</label>
+                  <input type="text" class="form-control" name="email" required />
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="password">Password</label>
+                  <input type="password" id="passwordInput" class="form-control" name="password" required />
+                </div>
+
+                <!-- 2 column grid layout for inline styling -->
+                <div class="row mb-4">
+                  <div class="col d-flex justify-content-center">
+                    <!-- Checkbox -->
+                    <!-- Show Password checkbox -->
+                    <div class="form-check mb-4">
+                      <input class="form-check-input" type="checkbox" id="showPasswordCheckbox" />
+                      <label class="form-check-label" for="showPasswordCheckbox">Show Password</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">LOGIN</button>
+                <p class="text-center text-danger fs-6">
+                  <%= message%>
+                </p>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Client-side validation
+  const form = document.querySelector('form');
+  const emailInput = document.querySelector('input[name="email"]');
+  const passwordInput = document.getElementById('passwordInput');
+  const showPasswordCheckbox = document.getElementById('showPasswordCheckbox');
+
+  form.addEventListener('submit', (event) => {
+    if (!isValidEmail(emailInput.value)) {
+      event.preventDefault();
+      emailInput.classList.add('is-invalid');
+    }
+  });
+
+  emailInput.addEventListener('input', () => {
+    emailInput.classList.remove('is-invalid');
+  });
+
+  showPasswordCheckbox.addEventListener('change', () => {
+    const { checked } = showPasswordCheckbox;
+    passwordInput.type = checked ? 'text' : 'password';
+  });
+
+  function isValidEmail(email) {
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    return emailRegex.test(email);
+  }
+</script>
+
+<%- include("../layout/simpleLayout/footer.ejs") %>

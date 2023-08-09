@@ -2,227 +2,265 @@
 <%- include("../layout/adminLayout/header.ejs") %>
 <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
-    <section class="section dashboard">
+  <div class="row mt-3 ml-lg-4">
+    <div class="col-lg-6 col-12 mb-3">
       <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-          <div class="row">
-
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card sales-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Sales <span>| Today</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-cart"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>145</h6>
-                      <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-              <div class="card info-card revenue-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>$3,264</h6>
-                      <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-              <div class="card info-card customers-card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-                  <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                      <h6>1244</h6>
-                      <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-            </div><!-- End Customers Card -->
-
-            <!-- Reports -->
-            <div class="col-12">
-              <div class="card">
-
-                <div class="filter">
-                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                      <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                  </ul>
-                </div>
-
-                <div class="card-body">
-                  <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                  <!-- Line Chart -->
-                  <div id="reportsChart"></div>
-
-                  <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                      new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                          name: 'Sales',
-                          data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                          name: 'Revenue',
-                          data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                          name: 'Customers',
-                          data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                          height: 350,
-                          type: 'area',
-                          toolbar: {
-                            show: false
-                          },
-                        },
-                        markers: {
-                          size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                          type: "gradient",
-                          gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                          }
-                        },
-                        dataLabels: {
-                          enabled: false
-                        },
-                        stroke: {
-                          curve: 'smooth',
-                          width: 2
-                        },
-                        xaxis: {
-                          type: 'datetime',
-                          categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                          x: {
-                            format: 'dd/MM/yy HH:mm'
-                          },
-                        }
-                      }).render();
-                    });
-                  </script>
-                  <!-- End Line Chart -->
-
-                </div>
-
-              </div>
-            </div><!-- End Reports -->
-
-    
+          <div class="col-12 mb-3">
+      <div class="container bg-white pt-3 pb-5">
+              <h5 class="text-primary px-3 pt-3 pb-0"> Daily Orders</h5>
+              <p class="pl-3 pt-0 pb-3"><small>Our orders for the past month</small> </p>
+              <div class="d-flex justify-content-end">
+                <form>
+                <select class="form-select" id="filter1" onchange="filter()">
+                  <option value="30" selected>Last 30 days</option>
+                  <option value="14">Last 14 days</option>
+                  <option value="7">Last 7 days</option>
+                </select>
+              </form>
+            </div>
+              <canvas id="daily" ></canvas>
           </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-       
-        
-         
-        
-        </div><!-- End Right side columns -->
-
       </div>
-    </section>
+      <div class="col-12">
+          <div class="container bg-white pt-3 pb-3 mt-1">
+              <h5 class="text-primary px-3 pt-3 pb-0">Category Distribution</h5>
+              <p class="pl-3 pt-0 pb-0"><small>Our orders per category</small> </p>
+              <div class="col-10">
+              <canvas id="categories"></canvas>
+              </div>
+          </div>
+      </div>
+    </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="row mb-3">
+    <div class="col-5 p-0 mr-3 mb-3">
+      <div class="card border-0 p-3">
+          <h4 class="text-primary">Customers</h4>
+        
+          <h4 class="text-primary"><i class="fa fa-user text-primary"></i><%=userCount%></h4>
+      </div>
+    </div>
+    <div class="col-5 px-lg-4 mb-3" style="box-sizing: content-box !important;">
+      <div class="card border-0 p-3">
+          <h4 class="text-primary">Orders</h4>
+        
+          <h4 class="text-primary"><i class="fa fa-user text-primary"></i><%=orderCount%></h4>
+      </div>
+    </div>
+    <div class="col-lg-11 bg-white mb-2">
+      <div class="container bg-white py-3 pb-4">
+          <h5 class="text-primary px-3 pt-3 pb-0"> Users joined</h5>
+          <p class="pl-3 pt-0 pb-3"><small>Our users this month vs last month</small> </p>
+          <canvas id="user"></canvas>
+      </div>
+      
+    </div>
+    <div class="col-lg-11 p-2">
+      <div class="container bg-white pt-2 pb-0">
+          <h5 class="text-primary px-3 pt-1 pb-0">Recent Transactions</h5>
+          <p class="pl-3 pt-0 pb-3"><small>Last few orders</small> </p>
+          <div class="table-responsive">
+            <table class="table bg-white">
+              <thead>
+                <tr>
+                  <th> No</th>
+                  <th>Order Date</th>
+                  <th>Customer</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (let i = 0; i < orders.length; i++) { %>
+                  <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= orders[i].order_date.toLocaleDateString() %></td>
+                    <td><%= orders[i].user.fullname %></td>
+                    <td><%= orders[i].order_status %></td>
+                  </tr>
+                <% } %>
+  
+
+              </tbody>
+            </table>
+          </div>
+          
+      <a href="/admin/order">Go to orders &rarr;</a>
+      </div>
+      <div class="container bg-white p-2 mt-2 rounded d-flex justify-content-between align-items-center">
+        <h6 class=" px-2"> Go to Sales report </h6>
+        <a href="/admin/report/yearly" class="btn btn-primary rounded text-white">Sales Report</a>
+      </div>
+    </div>
+  </div>
+   
+  </div>
+      </div>
+  
+  
+  
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+        
+      <script>
+        if(new URLSearchParams(window.location.search).get('filter1')){
+          document.getElementById('filter1').value = new URLSearchParams(window.location.search).get('filter1');
+        }
+      
+      async function filter(){
+        const filter1=document.getElementById('filter1').value;
+        window.location.href=`/admin?filter1=${filter1}`
+      }
+      
+          (async function () {
+            const filter1=document.getElementById('filter1').value;
+            const dailyOrderCount = JSON.parse('<%- JSON.stringify(daily) %>');
+            const user = JSON.parse('<%- JSON.stringify(user) %>');
+            const category = JSON.parse('<%- JSON.stringify(category) %>');
+
+        
+          const startDate = new Date();
+        startDate.setDate(startDate.getDate() - filter1); // Subtract the filter1Value from the current date
+        const endDate = new Date();
+        
+            const chartLabels = [];
+            let currentDate = new Date(startDate);
+            while (currentDate <= endDate) {
+              const dateString = currentDate.toISOString().split('T')[0];
+              chartLabels.push(dateString);
+              currentDate.setDate(currentDate.getDate() + 1);
+            }
+        
+            const dailyCounts = {};
+            dailyOrderCount.forEach((daily) => {
+              dailyCounts[daily._id] = daily.count;
+            });
+        
+            const chartData = chartLabels.map((date) => dailyCounts[date] || 0);
+        
+            new Chart(
+              document.getElementById('daily'),
+              {
+                type: 'line',
+                data: {
+                  labels: chartLabels,
+                  datasets: [
+                    {
+                      label: 'Daily Order Count',
+                      data: chartData,
+                      backgroundColor: 'rgba(170, 128, 252, 0.2)', // Customize the area color
+                      borderColor: 'rgba(170, 128, 252, 1)',
+                      borderWidth: 1,
+                      fill: 'origin', // Fill the area below the line
+                    }
+                  ]
+                },
+                options: {
+                  responsive: true,
+                  plugins: {
+                legend: {
+                  position: 'bottom',
+                },
+              },
+                  scales: {
+                    y: {
+                      beginAtZero: true,
+                      grid: {
+                        display: false,
+                      },
+                    },
+                    x: {
+                      beginAtZero: true,
+                      grid: {
+                        display: false,
+                      },
+                      ticks: {
+                      font: {
+                        size: 10, // Set the font size for the chart labels
+                      }
+                    }
+                    },
+                    
+                  },
+                }
+              }
+            );
+      
+            const categoryLabels = category.map(item => item._id);
+            const categoryCounts = category.map(item => item.count);
+      
+            new Chart(
+          document.getElementById('categories'),
+          {
+            type: 'pie',
+            data: {
+              labels: categoryLabels,
+              datasets: [
+                {
+                  label: 'Categories',
+                  data: categoryCounts,
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.8)',
+                    'rgba(54, 162, 235, 0.8)',
+                    'rgba(255, 206, 86, 0.8)',
+                    'rgba(75, 192, 192, 0.8)',
+                    'rgba(153, 102, 255, 0.8)',
+                  ], 
+                  borderColor: 'rgba(255, 255, 255, 1)', 
+                  borderWidth: 1,
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: 'right',
+                },
+              },
+            }
+          }
+        );
+      
+        const userLabels = user.map(item => item._id);
+        const userCounts = user.map(item => item.count);
+        new Chart(
+          document.getElementById('user'),
+          {
+            type: 'bar',
+            data: {
+              labels: userLabels,
+              datasets: [
+                {
+                  label: 'User Count',
+                  data: userCounts,
+                  backgroundColor: 'rgba(54, 162, 235, 0.8)',
+                  borderColor: 'rgba(54, 162, 235, 1)',
+                  borderWidth: 1,
+                }
+              ]
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  grid: {
+                    display: false, // Remove the y-axis grid lines
+                  },
+                },
+                x: {
+                  grid: {
+                    display: false, // Remove the x-axis grid lines
+                  },
+                },
+              },
+            }
+          }
+        );
+      
+          })();
+        </script>
+    
 
   </main><!-- End #main -->
   <%- include("../layout/adminLayout/footer.ejs") %>

@@ -5,8 +5,8 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <a class="breadcrumb-item text-dark" href="/">Home</a>
+                    <a class="breadcrumb-item text-dark" href="/shop">Shop</a>
                     <span class="breadcrumb-item active">Shop Detail</span>
                 </nav>
             </div>
@@ -75,15 +75,22 @@
                                 </a>
                             <% } %>
                         </div>
+                        <div class="btn btn-primary px-3" id="wishlist">
+                            <% if (userId) { %>
+                            <a  style="text-decoration: none; color: inherit;"   onclick="addToWishlist('<%=product._id%>')" >
+                                <i class="fa-solid fa-heart-circle-plus   <% if(userId && wishlist && wishlist.items.includes(product._id) ){ %>text-danger <% } %> " ></i>
+                            </a>
+                            <% } else { %>
+                                <a  style="text-decoration: none; color: inherit;"   onclick="showPopup()" >
+                                    <i class="fa-solid fa-heart-circle-plus   <% if(userId && wishlist && wishlist.items.includes(product._id) ){ %>text-danger <% } %> " ></i>
+                                </a>
+                                <% } %>
+                        </div>
                         <% } else { %>
                             <kbd class="bg-danger"> No Stock Available!</kbd>
+                            <div class="mt-2"><b>Please try after some time!</b></div>
                             <% } %>
 
-                        <div class="btn btn-primary px-3">
-                            <a href="" style="text-decoration: none; color: inherit;">
-                                <i class="fa-solid fa-heart-circle-plus"></i>
-                            </a>
-                        </div>
 
                     </div>
                 
@@ -345,6 +352,40 @@
         });
     </script>
     <script>
+
+function addToWishlist(id){
+            console.log(id);
+
+            $.ajax({
+                type: "GET",
+                url: "/addToWishlist",
+                data: {
+                    productId: id,
+                },
+                success: function(res){
+                    $.get(location.href, function(data){
+                        $("#wishlist").html($(data).find("#wishlist").html());
+                        $("#wishlist-icon").html($(data).find("#wishlist-icon").html());
+                    })
+                }
+            })
+        }
+
+        function notLogin(){
+            Swal.fire({
+                icon: "warning",
+                title: "You Are Not Login",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Login",
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    const currentUrl = location.href;
+                    location.href= `/login?url=${currentUrl}`
+                }
+            })
+        }
        
         function addToClick(id){
             
@@ -384,6 +425,9 @@
         }
       });
     }
+
+
+
     </script>
 
 

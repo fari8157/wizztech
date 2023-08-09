@@ -22,10 +22,19 @@
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.1/nouislider.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.7.1/nouislider.min.js"></script>
    
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> -->
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+
 
     <style>
         #snackbar,
@@ -153,13 +162,14 @@
                     <% if (userId) { %>
                         <a href="/cart" class="btn px-0 ml-2">
                             <i class="fas fa-heart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle"
-                                style="padding-bottom: 2px; ">0</span>
+                            <span id="wishlist-icon" class="badge text-dark border border-dark rounded-circle"
+                                style="padding-bottom: 2px; "><%= wishlist && wishlist.items ? wishlist.items.length : 0 %></span>
                         </a>
                         <a href="/cart" class="btn px-0 ml-2">
                             <i class="fas fa-shopping-cart text-dark"></i>
-                            <span class="badge text-dark border border-dark rounded-circle"
-                                style="padding-bottom: 2px;">0</span>
+                            <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px;">
+                                <%= cart ? cart.items.length : 0 %>
+                            </span>
                         </a>
                         <% } else { %>
                             <button class="btn btn-primary px-3" style="display: none;">Heart Icon</button>
@@ -179,10 +189,10 @@
             <div class="col-lg-4 col-6 text-left">
                 <form >
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for products">
+                        <input type="text" class="form-control"  id="searchInput" placeholder="Search for products">
                         <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
-                                <i class="fa fa-search"  onclick="search"></i>
+                            <span class="input-group-text bg-transparent text-primary" onclick="searchProducts()">
+                                <i class="fa fa-search"></i>
                             </span>
                         </div>
                     </div>
@@ -215,6 +225,7 @@
 
 
                     </div>
+                    
                 </nav>
             </div>
             <div class="col-lg-9">
@@ -260,3 +271,6 @@
         </div>
     </div>
     <!-- Navbar End -->
+
+
+  
