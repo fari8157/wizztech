@@ -1,6 +1,7 @@
 const categoryModel =require("../../models/category")
 const productModel=require("../../models/product")
 const userModel=require("../../models/userschema")
+const wishlistModel=require("../../models/wishlist")
 
 
 
@@ -13,7 +14,7 @@ const loadCategory = async (req, res) => {
         
         const user = await userModel.findOne({ _id: userId });
         const category = await categoryModel.find();
-
+        const wishlist=await wishlistModel.findOne({userId:userId})
         const search = req.query.search || '';
         let minamount = 0;
         let maxamount = 5000;

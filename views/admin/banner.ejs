@@ -1,0 +1,46 @@
+
+<%-include("../layout/adminLayout/header.ejs") %>
+<main id="main" class="main">
+
+<div style="overflow-y: auto;" class="w-100 d-flex align-items-center align-items-center">
+
+    <div class="table" >
+        <table class="table table-light table-striped table-responsive" >
+        <thead>
+            
+            <tr>
+                <th>sl.no</th>
+                <th>Banner</th>
+                <th>Title</th>
+                <th>Target Category</th>
+                <th>Description</th>
+                <th >Edit</th>
+                <th>Delete</th>
+            </tr>
+            
+        </thead>
+        
+        <tbody>
+            
+            <% banners.forEach((banner, i)=>{ %>
+            
+                <tr>
+                    <td><%= i+1 %></td>
+                    <td><img style="width: 1.5rem;height: 1.5rem;" src="<%= banner.bannerImage.url %>" alt=""></td>
+                    <td><%= banner.title %></td>
+                    <td><%= banner.targetCategory.name %></td>
+                    <td><%= banner.description %></td>
+                    <td><a href="/admin/banner/edit?bannerId=<%= banner._id %>"> <button type="button" class="btn btn-success">Edit</button></a></td>
+                    <td><a href="#">  <button type="button" class="btn btn-danger">Delete</button></a></td>
+                    
+                </tr>
+                    
+            <% }) %>
+            
+        </tbody>
+    </table>
+</div>
+</div >
+      
+</main>
+<%- include("../layout/adminLayout/footer.ejs") %>

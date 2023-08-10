@@ -7,6 +7,7 @@ const adminAuth = require('../middleware/admin');
 const adminControler=require("../controller/adminControler/adminController");
 const order=require('../controller/adminControler/order')
 const coupon=require('../controller/adminControler/coupon')
+const bannerController=require("../controller/adminControler/bannerController")
 const express=require("express")
 const routers=express.Router()
 
@@ -54,6 +55,12 @@ routers.post('/coupon/addCoupon',coupon.addCoupon)
 routers.get('/coupon/edit',coupon.loadEditCoupon)
 routers.post('/coupon/edit',coupon.editCoupon)
 routers.get('/coupon/delete',coupon.deleteCoupon)
+
+routers.get('/banner',adminAuth.isLogin,bannerController.loadBanner);
+routers.get('/banner/add',adminAuth.isLogin,bannerController.loadAddBanner);
+routers.post('/banner/add',bannerController.addBanner);
+routers.get('/banner/edit',adminAuth.isLogin,bannerController.loadEditBanner);
+routers.post('/banner/edit',bannerController.editBanner);
 
 
 module.exports=routers
