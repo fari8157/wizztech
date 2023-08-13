@@ -11,6 +11,7 @@ const loadorder = async (req, res) => {
         const userId = req.session.user_id;
         const userData = await userModel.findOne({ _id: userId });
         const orders = await orderModel.findOne({ user: userId }).sort({ order_date: -1 });
+        
 
         const products = await orderModel.find({ user: userId })
             .populate({

@@ -54,7 +54,8 @@ const loadCategory = async (req, res) => {
             category,
             search,
             minamount,
-            maxamount
+            maxamount,
+            wishlist,
         });
     } catch (error) {
         console.error('Error fetching products:', error);

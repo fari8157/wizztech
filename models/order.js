@@ -9,8 +9,7 @@ const  orderSchema = schema({
         required: true,
     },
     address: {
-        type: mongoose.Types.ObjectId,
-        ref: "address",
+        type: Object,
         required: true,
     },
     items: [

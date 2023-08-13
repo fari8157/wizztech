@@ -69,6 +69,8 @@
                                                                             <%= s.buildingName %>, <%= s.street %>, <br>
                                                                                     <%= s.city %>, <%= s.state %>, <br>
                                                                                             <%= s.country %>, <br>
+                                                                                            <a onclick="deleteAddress('<%=s._id%>')" class="btn btn-sm btn-danger">Delete</a>
+                                                                                            <a href="/profile/editAddress?type=main&id=<%= main._id %>" class="btn btn-sm btn-dark">Edit</a>
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -156,7 +158,32 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
 
+<!-- sweet alert cdn -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function deleteAddress(id) {
+    Swal.fire({
+      icon: "warning",
+      title: "Are you sure?",
+      text: "Delete Address?",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "remove",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`/address/delete?id=${id}`).then((result) => {
+          Swal.fire("removed!", "Address has been deleted.", "success").then((response) => {
+            location.reload();
+          })
+        })
+      }
+    });
+  }
+</script>
     <script>
         let inputElement;
         $(document).ready(function () {

@@ -122,7 +122,7 @@ const loadprofile = async (req, res) => {
             if (user) {
                 res.render("user/profile", { user, category, userId, cart });
             } else {
-                res.redirect("/login");
+                res.redirect("/login"); 
             }
         } else {
             res.redirect("/login");
@@ -133,7 +133,7 @@ const loadprofile = async (req, res) => {
     }
 };
 
-loadUpdateUser = async (req, res) => {
+const loadUpdateUser = async (req, res) => {
     try {
         if (req.session.user_id) {
             const userId = req.session.user_id;
@@ -153,7 +153,7 @@ loadUpdateUser = async (req, res) => {
     }
 };
 
-postUpdateUser = async (req, res) => {
+const postUpdateUser = async (req, res) => {
     try {
         if (req.session.user_id) {
             const userId = req.session.user_id;
@@ -167,7 +167,7 @@ postUpdateUser = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
-loadVerifyOldPassword = async (req, res) => {
+const loadVerifyOldPassword = async (req, res) => {
     try {
         res.render("user/verifyoldpass", { message: null });
     } catch (error) {
@@ -175,7 +175,7 @@ loadVerifyOldPassword = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
-postVerifyOldPassword = async (req, res) => {
+const postVerifyOldPassword = async (req, res) => {
     try {
         const password = req.body.password;
         const userId = req.session.user_id;
@@ -194,7 +194,7 @@ postVerifyOldPassword = async (req, res) => {
     }
 };
 
-loadNewpass = async (req, res) => {
+const loadNewpass = async (req, res) => {
     try {
         res.render("user/newPass");
     } catch (error) {
@@ -203,7 +203,7 @@ loadNewpass = async (req, res) => {
     }
 };
 
-postNewpass = async (req, res) => {
+ const postNewpass = async (req, res) => {
     try {
         const password = req.body.password;
         const userId = req.session.user_id;
@@ -216,67 +216,6 @@ postNewpass = async (req, res) => {
     }
 };
 
-loadAddAddress = async (req, res) => {
-    try {
-        const user = await User.findOne({ _id: req.session.user_id });
-        const contact = await addressModel.findOne({ user: req.session.user_id, type: "contact" });
-        const main = await addressModel.findOne({ user: req.session.user_id, type: "main" });
-        const secondary = await addressModel.find({ user: req.session.user_id, type: "secondary" });
-       
-        res.render('user/address', { contact, main, secondary,user });
-    } catch (error) {
-        console.error('Error loading address page:', error);
-        res.status(500).send('Server Error');
-    }
-};
-
-
-
-loadAddnewAddress = async (req, res) => {
-    try {
-        const user = await User.findOne({ _id:  req.session.user_id });
-        const type = req.query.type;
-        res.render('user/addadress', { type ,user});
-    } catch (error) {
-        console.error('Error loading add new address page:', error);
-        res.status(500).send('Server Error');
-    }
-};
-
-const addNewAddress = async (req, res) => {
-    try {
-        const userId = req.session.user_id;
-        const {
-            building,
-            street,
-            city,
-            state,
-            country,
-            type,
-        } = req.body;
-
-        const zipcode = parseInt(req.body.zipcode);
-        const phone = parseInt(req.body.phone);
-
-        const newAddress = new addressModel({
-            buildingName: building,
-            street,
-            city,
-            state,
-            zipCode: zipcode,
-            country,
-            phoneNumber: phone,
-            type,
-            user: userId
-        });
-
-        await newAddress.save();
-        res.redirect('/addAddress');
-    } catch (error) {
-        console.error('Error adding new address:', error);
-        res.status(500).send('Server Error');
-    }
-};
 
 
 module.exports = {
@@ -287,13 +226,11 @@ module.exports = {
     loadUpdateUser,
     loadVerifyOldPassword,
     loadNewpass,
-    loadAddAddress,
-  
+   
     userLogout,
     postUpdateUser,
     postVerifyOldPassword,
     postNewpass,
-    loadAddnewAddress,
-    addNewAddress,
+   
     forceLogout
 };

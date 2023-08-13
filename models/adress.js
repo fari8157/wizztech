@@ -37,7 +37,8 @@ const addressSchema = new mongoose.Schema({
     type:{
         type:String,
         require:true
-    }
+    },
+
 });
 
 module.exports = mongoose.model("address", addressSchema);

@@ -565,6 +565,13 @@
 
 
     <script>
+        document.addEventListener("keydown", function (event) {
+            var keycode = event.keyCode || event.which;
+            if (keycode === 13) {
+                event.preventDefault();
+                searchProducts();
+            }
+        });
 
         const minPriceRange = document.getElementById('minPriceRange');
         const maxPriceRange = document.getElementById('maxPriceRange');

@@ -62,5 +62,11 @@ routers.post('/banner/add',bannerController.addBanner);
 routers.get('/banner/edit',adminAuth.isLogin,bannerController.loadEditBanner);
 routers.post('/banner/edit',bannerController.editBanner);
 
+routers.get('/sale',adminAuth.isLogin,adminHome.loadSalesReport);
+routers.post('/sale/monthly',adminHome.monthlySaleReport);
+routers.post('/sale/daily',adminHome.dailySalesReport);
+routers.post('/sale/date',adminHome.byDateSaleReport);
+
+
 
 module.exports=routers

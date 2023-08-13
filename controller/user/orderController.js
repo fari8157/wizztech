@@ -75,6 +75,7 @@ const selectAddress = async (req, res) => {
         const { addressId, userId } = req.query;
         const shippingAdress = await addressModel.findById({ _id: addressId });
         const userData = await userModel.findOne({ _id: userId });
+        const coupons = await couponModel.find();
 
         if (userId) {
             const cart = await cartModel.findOne({ userId });
@@ -87,7 +88,7 @@ const selectAddress = async (req, res) => {
                 productList.push(item.productId);
             });
 
-            res.render('user/checkout', { cart, productList, addressId, shippingAdress, userData });
+            res.render('user/checkout', { cart, productList, addressId, shippingAdress, userData ,coupons});
         } else {
             res.redirect('/');
         }
@@ -106,7 +107,7 @@ const checkout = async (req, res) => {
             couponID,
             payment_id,
         } = req.body;
-
+         const addressObj=await addressModel.findById(address)
         const cart = await cartModel.findOne({ userId: userId });
 
         const orderItemIdList = Promise.all(cart.items.map(async (item) => {
@@ -125,7 +126,7 @@ const checkout = async (req, res) => {
 
         let newOrder = orderModel({
             user: userId,
-            address: address,
+            address: addressObj,
             items: items,
             price: cart.cartPrice,
             payment_status: false,

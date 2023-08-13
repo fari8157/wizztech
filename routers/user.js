@@ -11,6 +11,7 @@ const couponApply=require('../controller/user/coupon')
 const categoryC=require("../controller/user/category")
 const wallet=require("../controller/user/walletController")
 const wishlist=require("../controller/user/wishlist")
+const address=require("../controller/user/addressController")
 /// login&signup...//
 routers.get("/login",adminAuth.isLogout,userAuth.isLogout,authcontroller.loginLoad)
 routers.post("/login",authcontroller.verifyLogin)
@@ -44,8 +45,7 @@ routers.get("/register",adminAuth.isLogout,userAuth.isLogout,authcontroller.load
  routers.post("/profile/userUpdate",home.postUpdateUser)
  routers.get("/profile/verifyPassword",home.loadVerifyOldPassword)
  routers.post("/profile/verifyPassword",home.postVerifyOldPassword)
- routers.get("/profile/addnewadress",home.loadAddnewAddress)
- routers.post("/profile/addnewadress",home.addNewAddress)
+ 
  routers.get("/profile/newPassword",home.loadNewpass)
  routers.post("/profile/newPassword",home.postNewpass)
  
@@ -74,7 +74,12 @@ routers.get('/order/success',checkoutAddress.loadOrderSuccessPage)
  routers.get('/wallet',userAuth.isLogin,wallet.loadWallet);
 
 
- routers.get("/addAddress",home.loadAddAddress)
+ routers.get("/addAddress",address.loadAddress)
+ routers.delete('/address/delete',address.deleteAddress);
+ routers.get("/profile/editAddress",address.loadEditAddress)
+ routers.post("/profile/editAddress",address.editAddress)
+ routers.get("/profile/addnewadress",address.loadAddnewAddress)
+ routers.post("/profile/addnewadress",address.addNewAddress)
 //  routers.get("/wishlist",home.loadWishlist)
 
  routers.get('/wishlist',wishlist.loadWishlist);
