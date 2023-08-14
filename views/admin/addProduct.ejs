@@ -102,11 +102,10 @@
                     <div class="form-group">
                     <label for="category">Category:</label>
                     <select class="form-select" id="category" name="category" required>
-                       
-                            <option >laptop</option>	
-                            <option >mobiles</option>	
-                            <option >Audio Devices</option>	
-                        
+                      <% for (let i = 0; i < category.length; i++) { %>
+                          <option><%= category[i].name %></option>
+                      <% } %>
+                  </select>
                        
                     </select>
                 </div>

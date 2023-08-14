@@ -17,18 +17,18 @@ routers.post("/login",login.verify)
 
 routers.get('/category',adminAuth.isLogin,category.loadCategory)
 // routers.post('/categorires',category.loadCategory)
-routers.get('/addcategory',category.loadAddCategory)
+routers.get('/addcategory',adminAuth.isLogin,category.loadAddCategory)
 routers.post('/addcategory',category.addCategory)
-routers.get('/editCategory',category.loadEditCategory)
+routers.get('/editCategory',adminAuth.isLogin,category.loadEditCategory)
 routers.post('/editCategory',category.editCategory)
-routers.get('/customer',customer.userTable)
-routers.get('/editCustomer',customer.loadEditUser)
+routers.get('/customer',adminAuth.isLogin,customer.userTable)
+routers.get('/editCustomer',adminAuth.isLogin,customer.loadEditUser)
 routers.post('/customer',customer. updateUser );
 routers.get("/",adminAuth.isLogin,adminHome.adminHome)
-routers.get('/products',product.loadProduct)
-routers.get('/addproduct',product.loadaddProducts)
+routers.get('/products',adminAuth.isLogin,product.loadProduct)
+routers.get('/addproduct',adminAuth.isLogin,product.loadaddProducts)
 routers.post('/addproduct',product.addProducts)
-routers.get("/editproduct",product.loadProductEdit)
+routers.get("/editproduct",adminAuth.isLogin,product.loadProductEdit)
 routers.get('/editProductImages', product.loadImageEdit);
 routers.get("/product/edit/coverImage",product.loadCoverImage)
 routers.post("/product/edit/coverImage",product.postCoverImage)
@@ -49,12 +49,12 @@ routers.post('/order/status',order.statusChange)
 
 
 
-routers.get('/coupon',coupon.loadCoupon)
-routers.get('/coupon/addCoupon',coupon.loadAddCoupon)
+routers.get('/coupon',adminAuth.isLogin,coupon.loadCoupon)
+routers.get('/coupon/addCoupon',adminAuth.isLogin,coupon.loadAddCoupon)
 routers.post('/coupon/addCoupon',coupon.addCoupon)
-routers.get('/coupon/edit',coupon.loadEditCoupon)
+routers.get('/coupon/edit',adminAuth.isLogin,coupon.loadEditCoupon)
 routers.post('/coupon/edit',coupon.editCoupon)
-routers.get('/coupon/delete',coupon.deleteCoupon)
+routers.get('/coupon/delete',adminAuth.isLogin,coupon.deleteCoupon)
 
 routers.get('/banner',adminAuth.isLogin,bannerController.loadBanner);
 routers.get('/banner/add',adminAuth.isLogin,bannerController.loadAddBanner);

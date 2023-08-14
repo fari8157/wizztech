@@ -15,11 +15,8 @@ const loadCart = async (req, res) => {
       let products;
       if (cart) {
         for (const item of cart.items) {
-          console.log(item);
           const product = await productModel.findOne({ _id: item.productId });
-          console.log(product);
-  
-          if (item.quantity > product.quantity) {
+       if (item.quantity > product.quantity) {
             await cartModel.updateOne(
               {
                 userId: userId,
@@ -38,9 +35,6 @@ const loadCart = async (req, res) => {
           productList.push(item.productId);
         });
       }
-  
-      console.log(products);
-  
       res.render("user/cart", {
         userId,
         user,
@@ -51,7 +45,7 @@ const loadCart = async (req, res) => {
         wishlist,
       });
     } catch (err) {
-      console.log(err.message);
+      res.render("user/404")
     }
   };
   
@@ -137,7 +131,7 @@ const loadCart = async (req, res) => {
   
       res.json({ response: true });
     } catch (error) {
-      console.log(error.message);
+      res.render("user/404")
     }
   };
   
@@ -159,7 +153,7 @@ const loadCart = async (req, res) => {
   
       res.json({ response: true });
     } catch (error) {
-      console.log(error.message);
+      res.render("user/404")
     }
   };
   
@@ -181,7 +175,7 @@ const loadCart = async (req, res) => {
   
       res.json({ response: true });
     } catch (error) {
-      console.log(error.message);
+      res.render("user/404")
     }
   };
   
@@ -226,7 +220,7 @@ const loadCart = async (req, res) => {
   
       res.json({ response: true });
     } catch (error) {
-      console.log(error.message);
+      res.render("user/404")
     }
   };
 module.exports = {

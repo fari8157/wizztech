@@ -5,7 +5,7 @@ const adminlogout = async (req, res) => {
         req.session.admin_id = null
         res.redirect('/admin')
     } catch (error) {
-        console.log(error.message);
+       
     }
 }
 

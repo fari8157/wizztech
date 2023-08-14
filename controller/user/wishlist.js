@@ -12,21 +12,17 @@ const loadWishlist = async (req, res)=>{
         const wishlist = await wishlistModel.findOne({userId: id}).populate("items");
         const cart = await cartModel.findOne({userId: id});
 
-        console.log(wishlist);
-
-
+    
         res.render('user/wishlist',{id, user, wishlist, cart});
         
     } catch (error) {
-        console.log(error);
+        res.render("user/404")
     }
 }
 
 const addToWishlist = async (req, res)=>{
 
     try {
-
-        console.log("ksdjfisajdfsaijdfifdi");
 
         const userId = req.session.user_id;
         const { productId } = req.query;
@@ -67,7 +63,7 @@ const addToWishlist = async (req, res)=>{
 
         
     } catch (error) {
-        console.log(error);
+        res.render("user/404")
     }
 
 }

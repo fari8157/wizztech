@@ -63,9 +63,7 @@ const loadCategory = async (req, res) => {
         return res.redirect("/admin/category");
       }
     } catch (error) {
-      console.error("Error adding category:", error);
-      // Handle the error and send an appropriate response
-      return res.status(500).send("Internal Server Error");
+     
     }
   };
   

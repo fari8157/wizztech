@@ -58,8 +58,7 @@ const loadCategory = async (req, res) => {
             wishlist,
         });
     } catch (error) {
-        console.error('Error fetching products:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 

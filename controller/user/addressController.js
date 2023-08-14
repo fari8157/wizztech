@@ -16,8 +16,7 @@ const addressModel = require('../../models/adress');
        
         res.render('user/address', { contact, main, secondary,user });
     } catch (error) {
-        console.error('Error loading address page:', error);
-        res.status(500).send('Server Error');
+       res.render("user/404")
     }
 };
 
@@ -29,8 +28,7 @@ const loadAddnewAddress = async (req, res) => {
         const type = req.query.type;
         res.render('user/addadress', { type ,user});
     } catch (error) {
-        console.error('Error loading add new address page:', error);
-        res.status(500).send('Server Error');
+       res.render("user/404")
     }
 };
 
@@ -64,15 +62,18 @@ const addNewAddress = async (req, res) => {
         await newAddress.save();
         res.redirect('/addAddress');
     } catch (error) {
-        console.error('Error adding new address:', error);
-        res.status(500).send('Server Error');
+       res.render("user/404")
     }
 };
 
 const loadEditAddress = async (req, res)=>{
+    try{
     const { type, id} = req.query;
     const address = await addressModel.findOne({_id: id});
     res.render("user/editAddress",{type, address});
+}catch(error){
+    res.render("user/404")
+}
 }
 
 
@@ -106,7 +107,7 @@ const editAddress = async (req, res)=>{
         res.redirect('/addAddress');
         
     } catch (error) {
-        console.log(error);
+        res.render("user/404")
     }
     
 }
@@ -119,7 +120,7 @@ const deleteAddress = async (req, res)=>{
         res.json({response: true});
 
     } catch (error) {
-        console.log(error)
+        res.render("user/404")
     }
 }
 

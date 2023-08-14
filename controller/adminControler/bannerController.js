@@ -4,10 +4,10 @@ const cloudinaryUpload = require('../../utility/uploadImage');
 
 const loadBanner = async (req, res)=>{
     try {
-        const banners = await bannerModel.find().populate("targetCategory");
+        const banners = await bannerModel.find()
         res.render('admin/banner',{banners});
     } catch (error) {
-        console.log(error);
+        
     }
 }
 
@@ -41,7 +41,7 @@ const addBanner = async (req, res)=>{
         res.redirect('/admin/banner');
 
     } catch (error) {
-        console.log(error);
+        
     }
 }
 
@@ -55,7 +55,7 @@ const loadEditBanner = async (req, res)=>{
         res.render("admin/editBanner",{banner});
         
     } catch (error) {
-        console.log(error);
+        
     }
 }
 
@@ -77,7 +77,7 @@ const editBanner = async (req, res)=>{
         res.redirect('/admin/banner');
         
     } catch (error) {
-        console.log(error);
+       
     }
 }
 

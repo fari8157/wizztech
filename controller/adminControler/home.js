@@ -171,7 +171,7 @@ const loadSalesReport = async (req, res) => {
 
     res.render("admin/sales", { yearly });
   } catch (error) {
-    res.render("user/404page");
+    res.render("user/404");
   }
 };
 
@@ -226,7 +226,7 @@ const monthlySaleReport = async (req, res) => {
 
     res.json({ monthlySales, error: false });
   } catch (error) {
-    res.render("user/404page");
+    res.render("user/404");
   }
 };
 
@@ -263,7 +263,7 @@ const dailySalesReport = async (req, res) => {
 
     res.json({ dailySales, error: false });
   } catch (error) {
-    res.render("user/404page");
+    res.render("user/404");
   }
 };
 
@@ -323,7 +323,7 @@ const byDateSaleReport = async (req, res) => {
 
     res.json({ byDateSales, error: false });
   } catch (error) {
-    res.render("user/404page");
+    res.render("user/404");
   }
 };
 

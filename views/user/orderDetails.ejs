@@ -1,264 +1,208 @@
 <%- include("../layout/simpleLayout/header.ejs") %>
 <style>
   .track-line {
-  height: 2px !important;
-  background-color: #488978;
-  opacity: 1;
+    height: 2px !important;
+    background-color: #488978;
+    opacity: 1;
   }
 
   .dot {
-  height: 10px;
-  width: 10px;
-  margin-left: 3px;
-  margin-right: 3px;
-  margin-top: 0px;
-  background-color: #488978;
-  border-radius: 50%;
-  display: inline-block
+    height: 10px;
+    width: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-top: 0px;
+    background-color: #488978;
+    border-radius: 50%;
+    display: inline-block;
   }
 
   .big-dot {
-  height: 25px;
-  width: 25px;
-  margin-left: 0px;
-  margin-right: 0px;
-  margin-top: 0px;
-  background-color: #488978;
-  border-radius: 50%;
-  display: inline-block;
+    height: 25px;
+    width: 25px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    background-color: #488978;
+    border-radius: 50%;
+    display: inline-block;
   }
 
   .big-dot i {
-  font-size: 12px;
+    font-size: 12px;
   }
 
   .card-stepper {
-  z-index: 0
+    z-index: 0;
   }
 </style>
 
- 
-    
 <div class="col-lg-12 mb-5">
   <div class="card mt-4">
-  <div class="card-header bg-light py-4 ">
+    <div class="card-header bg-light py-4">
       <h4 class="mb-0">#Order Details</h4>
       <p class="mb-0"><%= order._id %></p>
-  </div>
-  <div class="card-body " id="order-track">
-
+    </div>
+    <div class="card-body" id="order-track">
       <section>
-
-          <div class="container py-5 h-100">
-              <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col">
-                  <div class="card card-stepper" style="border-radius: 10px;" >
-                    <div class="card-body p-4">
-                      
-                      <% if(order.order_status !== "cancelled" && order.order_status !== "rejected"){ %>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <div class="d-flex flex-column">
-                          <span class="lead fw-normal">Track Your Order</span>
-                          <span class="text-muted small">Order Placed on <span><%=order.order_date.toLocaleDateString('en-US', { year: 'numeric' ,
-                              month: 'numeric' , day: 'numeric' });%></span>
-                        </div>
-                        <!-- <div>
-                          <button class="btn btn-outline-primary" type="button">Track order details</button>
-                        </div> -->
-                      </div>
-                      
-                      <hr class="my-4">
-          
-                      <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
-                        <span class="dot"></span>
-                        <% if(order.order_status == "shipped") {%>
-                        <hr class="flex-fill track-line" ><span class="dot"></span>
-                        <hr  class="flex-fill" ><span
-                          class="d-flex justify-content-center align-items-center big-dot dot">
-                          <i class="fa fa-check text-white"></i></span>
-                        
-
-                        <%} else if(order.order_status == "delivered") {%>
-                          <hr class="flex-fill track-line" ><span class="dot"></span>
-                          <hr  class="flex-fill track-line" ><span
-                            class="d-flex justify-content-center align-items-center big-dot dot">
-                            <i class="fa fa-check text-white"></i></span>
-                          <% } %>
-
-                        
-                      </div>
-          
-                      <div class="d-flex flex-row justify-content-between align-items-center">
-                        <div class="d-flex flex-column align-items-start"><span>Order placed</span>
-                        </div>
-                        
-                        <div class="d-flex flex-column justify-content-center align-items-center"><span>Order Shipped</span></div>
-                        
-                        <div class="d-flex flex-column align-items-end"><span>Delivered</span></div>
-                      </div>
-                      <% }else{ %>
-                          <div>
-                              <div class="d-flex justify-content-center h3 text-danger font-weight-bold text-uppercase">Order <%= order.order_status  %></div>
-                          </div>
-                      <% } %>
-          
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col">
+              <div class="card card-stepper" style="border-radius: 10px;">
+                <div class="card-body p-4">
+                  <% if (order.order_status !== "cancelled" && order.order_status !== "rejected") { %>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column">
+                      <span class="lead fw-normal">Track Your Order</span>
+                      <span class="text-muted small">Order Placed on
+                        <span><%= order.order_date.toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }); %></span>
+                      </span>
                     </div>
                   </div>
+                  <hr class="my-4">
+                  <div class="d-flex flex-row justify-content-between align-items-center align-content-center">
+                    <span class="dot"></span>
+                    <% if (order.order_status == "shipped") { %>
+                    <hr class="flex-fill track-line"><span class="dot"></span>
+                    <hr class="flex-fill"><span class="d-flex justify-content-center align-items-center big-dot dot">
+                      <i class="fa fa-check text-white"></i></span>
+                    <% } else if (order.order_status == "delivered") { %>
+                    <hr class="flex-fill track-line"><span class="dot"></span>
+                    <hr class="flex-fill track-line"><span
+                      class="d-flex justify-content-center align-items-center big-dot dot">
+                      <i class="fa fa-check text-white"></i></span>
+                    <% } %>
+                  </div>
+                  <div class="d-flex flex-row justify-content-between align-items-center">
+                    <div class="d-flex flex-column align-items-start"><span>Order placed</span></div>
+                    <div class="d-flex flex-column justify-content-center align-items-center"><span>Order Shipped</span>
+                    </div>
+                    <div class="d-flex flex-column align-items-end"><span>Delivered</span></div>
+                  </div>
+                  <% } else { %>
+                  <div>
+                    <div class="d-flex justify-content-center h3 text-danger font-weight-bold text-uppercase">
+                      Order <%= order.order_status %></div>
+                  </div>
+                  <% } %>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
       </section>
-      
-        <div class="card mx-3">
-          <div class="card-header">
-              Order details<br><small>Your order items</small>
-          </div>
-          <div class="card-body" style="overflow: auto;">
-              <% subtotal = 0%>
-              <table class="table text-center table-primary">
-                  <colgroup>
-                      <col width="100" />
-                      <col />
-                      <col width="1" />
-                      <col />
-                      <col width="100" />
-                      <col />
-                      <col width="1" />
-                      <col />
 
-                  </colgroup>
-                  <thead class="bg-dark text-light">
-                      <tr>
-                          <th class="first">Image</th>
-                          <th class="text-center font-weight-500" >Product</th>
-                          <th class="text-center  font-weight-500" >Price</th>
-                          <th class="text-center  font-weight-500">Qty</th>
-                          <th class="text-start  font-weight-500">Total</th>
-                      </tr>
-                  </thead>
-                  <tbody class="table-bordered">
-                      <% for( let i=0; i < order.items.length; i++ ) { %>
-                          <tr class="bg-light">
-                              <td class="product-thumbnail text-start">
-                                  <a href="#"><img
-                                          src="<%=order.items[i].product.image[0].url %>"
-                                          alt="..." class="img-fluid" width="60vw"></a>
-                              </td>
-                              <td class="text-center" style="font-size: 1.2vw;">
-                                  <b class="text-dark ">
-                                      <%=order.items[i].product.name %>
-                                  </b>
-                              </td>
-                              <td class="text-center text-dark" style="font-size: 1vw;">
-                                  <b>
-                                      <%=order.items[i].product.price %>
-                                  </b>
-                              </td>
-                              <td class="text-center" style="font-size: 1vw;"><span><%=order.items[i].quantity %></span>
-                              </td>
-                              <td id="totalPrice"
-                                  class="product-subtotal text-center" style="font-size: 1vw;">
-                                  <span>&#8377;<%=(order.items[i].quantity * order.items[i].productPrice).toFixed(2) %></span>
-                              </td>
-                          </tr>
-                          <% subtotal += (order.items[i].quantity * order.items[i].productPrice) %>
-                          <% } %>
-                  </tbody>
-              </table>
-
-
-              <div class="col-12 d-flex justify-content-end">
-                  <div class="d-flex flex-column w-25">
-                      <!-- <kbd class="font-weight-bolder mb-2 d-flex justify-content-between bg-secondary">Sub Total: <span>&#8377;<%= subtotal %>.00</span></kbd> -->
-                      <kbd class="bg-warning text-dark font-weight-bolder d-flex justify-content-between">Coupon: <span>- &#8377;<% if(coupon){ %><%= coupon.discount %><% }else{ %>0<% } %>.00</span></kbd>
-                      <kbd class="font-weight-bolder mt-2 d-flex justify-content-between">Total: <span>&#8377;<%= order.price.toFixed(2) %></span></kbd>
-                  </div>
+      <div class="card mx-3">
+        <div class="card-header">
+          Order details<br><small>Your order items</small>
+        </div>
+        <div class="card-body" style="overflow: auto;">
+          <% subtotal = 0%>
+          <table class="table text-center table-primary">
+            <colgroup>
+              <col width="100" />
+              <col />
+              <col width="1" />
+              <col />
+              <col width="100" />
+              <col />
+              <col width="1" />
+              <col />
+            </colgroup>
+            <thead class="bg-dark text-light">
+              <tr>
+                <th class="first">Image</th>
+                <th class="text-center font-weight-500">Product</th>
+                <th class="text-center font-weight-500">Price</th>
+                <th class="text-center font-weight-500">Qty</th>
+                <th class="text-start font-weight-500">Total</th>
+              </tr>
+            </thead>
+            <tbody class="table-bordered">
+              <% for (let i = 0; i < order.items.length; i++) { %>
+              <tr class="bg-light">
+                <td class="product-thumbnail text-start">
+                  <a href="#"><img src="<%= order.items[i].product.image[0].url %>" alt="..." class="img-fluid"
+                      width="60vw"></a>
+                </td>
+                <td class="text-center" style="font-size: 1.2vw;">
+                  <b class="text-dark "><%= order.items[i].product.name %></b>
+                </td>
+                <td class="text-center text-dark" style="font-size: 1vw;">
+                  <b><%= order.items[i].product.price %></b>
+                </td>
+                <td class="text-center" style="font-size: 1vw;"><span><%= order.items[i].quantity %></span></td>
+                <td id="totalPrice" class="product-subtotal text-center" style="font-size: 1vw;">
+                  <span>&#8377;<%=(order.items[i].quantity * order.items[i].productPrice).toFixed(2) %></span>
+                </td>
+              </tr>
+              <% subtotal += (order.items[i].quantity * order.items[i].productPrice) %>
+              <% } %>
+            </tbody>
+          </table>
+          <div class="col-12">
+            <div class="d-flex justify-content-end">
+              <div class="d-flex flex-column w-100 w-md-50">
+                <kbd class="bg-warning text-dark font-weight-bolder d-flex justify-content-between">Coupon:
+                  <span>- &#8377;<% if (coupon) { %><%= coupon.discount %><% } else { %>0<% } %>.00</span></kbd>
+                <kbd class="font-weight-bolder mt-2 d-flex justify-content-between">Total:
+                  <span>&#8377;<%= order.price.toFixed(2) %></span></kbd>
               </div>
+            </div>
           </div>
-        </div>
-        <div class="card m-3">
-          <div class="card-header">
-              Shipping Address
-          </div>
-          <div class="card-body">
           
-           ph:   <%=address.phoneNumber%>,<br>
-              <%=address.buildingName%>,<%=address.street%>,<%=address.city%>,<br>
-              <%=address.state%>,<%=address.country%>,
-           pin:   <%=address.zipCode%>
-
-          </div>
         </div>
-        <div class="card m-3">
-          <div class="card-header">
-              Payment Mode
-          </div>
-          <div class="card-body">
-              <% if(order.payment_method == "cod"){ %> Cash On Delivery <% } %>
-              <% if(order.payment_method == "online"){ %> Online Payment <% } %>
-              <% if(order.payment_method == "wallet"){ %> Wallet Payment <% } %>
-          </div>
-        </div>
+      </div>
 
-
-        <% if(Date.now() < new Date(new Date(order.order_date).getTime() + 2 * 24 * 60 * 60 * 1000) && order.order_status == "delivered"){  %>
-        <div class="card m-3">
-          <div class="card-header">
-              Return Your Order
-          </div>
-         <span class="text-danger ml-2">You have the option to return the order within 2 days from the date of delivery.</span> 
-          <div class="card-body">
-              <button type="button" onclick="returnOrder()" class="btn btn-sm btn-dark">Return</button>
-          </div>
+      <div class="card m-3">
+        <div class="card-header">
+          Shipping Address
         </div>
-        <% } %>
+        <div class="card-body">
+          ph: <%= address.phoneNumber %>,<br>
+          <%= address.buildingName %>,<%= address.street %>,<%= address.city %>,<br>
+          <%= address.state %>,<%= address.country %>, pin: <%= address.zipCode %>
+        </div>
+      </div>
+
+      <div class="card m-3">
+        <div class="card-header">
+          Payment Mode
+        </div>
+        <div class="card-body">
+          <% if (order.payment_method == "cod") { %> Cash On Delivery <% } %>
+          <% if (order.payment_method == "online") { %> Online Payment <% } %>
+          <% if (order.payment_method == "wallet") { %> Wallet Payment <% } %>
+        </div>
+      </div>
+
+      <% if (Date.now() < new Date(new Date(order.order_date).getTime() + 2 * 24 * 60 * 60 * 1000) && order.order_status == "delivered") { %>
+      <div class="card m-3">
+        <div class="card-header">
+          Return Your Order
+        </div>
+        <span class="text-danger ml-2">You have the option to return the order within 2 days from the date of
+          delivery.</span>
+        <div class="card-body">
+          <button type="button" onclick="returnOrder()" class="btn btn-sm btn-dark">Return</button>
+        </div>
+      </div>
+      <% } %>
     </div>
   </div>
-  </div>
+</div>
 
-
-<!-- axios cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
-
-<!-- sweet alert cdn -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-  function login(){
-      const currentUrl = location.href;
-      location.href= `/login?url=${currentUrl}`
+  function login() {
+    const currentUrl = location.href;
+    location.href = `/login?url=${currentUrl}`
   }
 
-  function returnOrder(){
-  //     Swal.fire({
-  //   title: 'Please Mention your issue',
-  // //   scrollbarPadding: false,
-  //   html: `<div class="d-flex flex-column align-items-start"><h5><input type="checkbox" id="damage"  />The Product is Damaged </h5>
-  //         <h5><input type="checkbox" id="wrong-item"  />Wrong Item Delivered </h5></div>`,
-  //   confirmButtonText: 'confirm',
-  //   preConfirm: () => {
-  //     var damage = Swal.getPopup().querySelector('#damage').checked
-  //     var wrong = Swal.getPopup().querySelector('#wrong-item').checked
-  //     console.log("Alcool = " + damage + " Cigarro = "+ wrong)
-
-  //     $.ajax({
-  //         type: "POST",
-  //         url: "/order/return",
-  //         data: {
-  //             damage,
-  //             wrong,
-  //         }
-  //     })
-
-      
-      
-  //   }
-  // }).then((result) => {
-  //   Swal.fire("alcool: "+`${result.value.damage}`+" and Cigarro: "+`${result.value.wrong}`);
-  // })
-
-
-  Swal.fire({
+  function returnOrder() {
+    Swal.fire({
       icon: "warning",
       title: "Are you sure?",
       text: "Return Order?",
@@ -291,11 +235,7 @@
       }
     });
 
-
-  
   }
-
-  
 </script>
 
 <%- include("../layout/simpleLayout/footer.ejs") %>

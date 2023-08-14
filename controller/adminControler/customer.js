@@ -20,7 +20,7 @@ const userTable = async (req, res) => {
     res.render('admin/customer', { user: userDetails });
 
   } catch (error) {
-    console.error(error.message);
+   
   }
 }
 const loadEditUser = async (req, res) => {
@@ -36,7 +36,7 @@ const loadEditUser = async (req, res) => {
     //  }
 
   } catch (error) {
-    console.log(error);
+   
 
   }
 
@@ -48,7 +48,7 @@ const updateUser = async (req,res)=>{
       await User.findByIdAndUpdate(id,{$set:{access:access}})
       res.redirect('/admin/customer')
   } catch (error) {
-      console.log(error);
+      
     }
 }
 

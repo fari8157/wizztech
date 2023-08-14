@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const wishlist=require("../user/wishlist");
 const wishlistModel = require('../../models/wishlist');
+const bannerModel=require("../../models/bannerModel")
 const loadHome = async (req, res) => {
     try {
         const category = await Category.find();
@@ -15,10 +16,10 @@ const loadHome = async (req, res) => {
         const user = await User.findById(userId);
         const cart = await cartModel.findOne({ userId: userId });
         const wishlist=await wishlistModel.findOne({ userId: userId})
-        res.render('user/home', { category: category, product: product, user, userId, cart,wishlist });
+        const banners=await bannerModel.find()
+        res.render('user/home', { category: category, product: product, user, userId, cart,wishlist,banners});
     } catch (error) {
-        console.error('Error loading home:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -69,8 +70,7 @@ const loadShop = async (req, res) => {
             wishlist,
         });
     } catch (error) {
-        console.error('Error loading shop:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -86,8 +86,7 @@ const loadDtails = async (req, res) => {
         const wishlist = await wishlistModel.findOne({userId});
         res.render('user/details', { product: product, category: category, products: products, userId, user, cart,wishlist });
     } catch (error) {
-        console.error('Error loading details:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -128,8 +127,7 @@ const loadprofile = async (req, res) => {
             res.redirect("/login");
         }
     } catch (error) {
-        console.error('Error loading profile:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -148,8 +146,7 @@ const loadUpdateUser = async (req, res) => {
             res.redirect("/login");
         }
     } catch (error) {
-        console.error('Error loading update user:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -163,16 +160,14 @@ const postUpdateUser = async (req, res) => {
             res.redirect('/profile');
         }
     } catch (error) {
-        console.error('Error updating user:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 const loadVerifyOldPassword = async (req, res) => {
     try {
         res.render("user/verifyoldpass", { message: null });
     } catch (error) {
-        console.error('Error loading verify old password page:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 const postVerifyOldPassword = async (req, res) => {
@@ -189,8 +184,7 @@ const postVerifyOldPassword = async (req, res) => {
             res.render("user/verifyoldpass", { message: "check password" });
         }
     } catch (error) {
-        console.error('Error verifying old password:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -198,8 +192,7 @@ const loadNewpass = async (req, res) => {
     try {
         res.render("user/newPass");
     } catch (error) {
-        console.error('Error loading new password page:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -211,8 +204,7 @@ const loadNewpass = async (req, res) => {
         await User.findByIdAndUpdate(userId, { password: passwordHash });
         res.redirect("/profile");
     } catch (error) {
-        console.error('Error updating password:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 

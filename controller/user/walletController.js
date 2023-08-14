@@ -15,7 +15,7 @@ const loadWallet = async (req, res)=>{
         res.render("user/wallet",{id: userId, user, wallet, cart});
         
     } catch (error) {
-        console.log(error);
+        res.render("user/404")
     }
 }
 

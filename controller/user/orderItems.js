@@ -24,10 +24,11 @@ const loadorder = async (req, res) => {
             })
             .sort({ order_date: -1 });
 
+        console.log(products);
+
         res.render('user/order', { products, orders, user: userData });
     } catch (error) {
-        console.error('Error loading order:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -53,8 +54,7 @@ const loadOrderDetails = async (req, res) => {
 
         res.render('user/orderDetails', { id: userId, user, order, coupon, address: cartAddress.address, cart });
     } catch (error) {
-        console.error('Error loading order details:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -104,8 +104,7 @@ const cancelOrder = async (req, res) => {
 
         res.send({ response: true });
     } catch (error) {
-        console.error('Error cancelling order:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -159,8 +158,7 @@ const orderReturn = async (req, res) => {
             res.send({ success: false });
         }
     } catch (error) {
-        console.error('Error processing order return:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 

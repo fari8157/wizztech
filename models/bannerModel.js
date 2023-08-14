@@ -22,8 +22,7 @@ const bannerSchema = schema({
         required: true,
     },
     targetCategory: {
-        type: mongoose.Types.ObjectId,
-        ref: "Category",
+        type: String,
         required: true,
     }
 })

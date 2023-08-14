@@ -12,7 +12,7 @@ const loadlogin = async (req, res) => {
         }
         
     } catch (error) {
-        console.log(error.message);
+        
     }
 }
 
@@ -41,7 +41,7 @@ const verify = async (req, res) => {
         }
 
     } catch (error) {
-        console.log(error.message);
+        
     }
 }
 

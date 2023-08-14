@@ -7,10 +7,14 @@ const deleteImage = require('../../utility/deleteImage');
 
 
 const loadProduct=async(req,res)=>{
+    try{
     const products=await productModel.find()
     const category=await categoryModel.find()
     res.render("admin/product",{products,category})
-}
+}catch (error){
+    res.render("user/404")
+   
+}}
 const loadaddProducts=async(req,res)=>{
   const category=await categoryModel.find()
     res.render("admin/addProduct",{message:null,category})

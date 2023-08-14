@@ -8,7 +8,7 @@ const loadRegister = async (req, res) => {
   try {
     res.render('user/signup', { message: null });
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -35,7 +35,7 @@ const insertUser = async (req, res) => {
       res.redirect("/login");
     }
   } catch (err) {
-    console.log(err);
+    res.render("user/404")
   }
 };
 
@@ -44,7 +44,7 @@ const securePassword = async (password) => {
     const passwordHash = await bcrypt.hash(password, 10);
     return passwordHash;
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -54,7 +54,7 @@ const loginLoad = async (req, res) => {
     res.render('user/login', { message: login_message });
     login_message = null;
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -95,7 +95,7 @@ const verifyLogin = async (req, res) => {
       res.render('user/login', { message: "User not found" });
     }
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -104,7 +104,7 @@ const loadotp = async (req, res) => {
   try {
     res.render("user/otpverification", { message: null, localaction: "/login/otp" });
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -122,7 +122,7 @@ const otpVerify = async (req, res) => {
       res.render('user/otpverification', { message: "Incorrect OTP. Please try again.", localaction: "/login/otp" });
     }
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -130,7 +130,7 @@ const loadForgetpass = async (req, res) => {
   try {
     res.render('user/forgetPass');
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -138,7 +138,7 @@ const loadForgetOtp = async (req, res) => {
   try {
     res.render("user/otpverification", { message: null, localaction: "/forget/otp" });
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -164,7 +164,7 @@ const forgetPass = async (req, res) => {
       }
     }
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -178,7 +178,7 @@ const forgetOtp = async (req, res) => {
       res.render('user/conformPass', { localaction: "/forget/otp" });
     }
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 
@@ -197,7 +197,7 @@ const updatePassword = async (req, res) => {
     console.log(result);
     res.redirect("/login");
   } catch (err) {
-    console.log(err.message);
+    res.render("user/404")
   }
 };
 module.exports = {

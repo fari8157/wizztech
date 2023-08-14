@@ -194,10 +194,10 @@
         <div class="row bg-secondary py-1 px-xl-5">
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="d-inline-flex align-items-center h-100">
-                    <a class="text-body mr-3" href="">About</a>
+                    <!-- <a class="text-body mr-3" href="">About</a>
                     <a class="text-body mr-3" href="">Contact</a>
                     <a class="text-body mr-3" href="">Help</a>
-                    <a class="text-body mr-3" href="">FAQs</a>
+                    <a class="text-body mr-3" href="">FAQs</a> -->
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
@@ -226,7 +226,7 @@
                 </div>
                 <div class="d-inline-flex align-items-center d-block">
                     <% if (userId) { %>
-                        <a href="/cart" class="btn px-0 ml-2">
+                        <a href="/wishlist" class="btn px-0 ml-2">
                             <i class="fas fa-heart text-dark"></i>
                             <span class="badge text-dark border border-dark rounded-circle"
                                 style="padding-bottom: 2px; "><%= wishlist && wishlist.items ? wishlist.items.length : 0 %></span>
@@ -352,8 +352,8 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark" href="#">Home</a>
-                    <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                    <a class="breadcrumb-item text-dark" href="/">Home</a>
+                    <a class="breadcrumb-item text-dark" href="/shop">Shop</a>
                     <span class="breadcrumb-item active">Shop List</span>
                 </nav>
             </div>
@@ -409,7 +409,7 @@
                             </div>
                             <span class="range-values">
                               <span>$<span id="minValue">0</span></span>
-                              <span>$<span id="maxValue">2000</span></span>
+                              <span>$<span id="maxValue">5000</span></span>
                             </span>
                           </div>
                           
@@ -474,14 +474,14 @@
                                
                             </div>
                             <div class="ml-2">
-                                <div class="btn-group">
+                                <!-- <div class="btn-group">
                                     <button type="button" class="btn btn-sm btn-light dropdown-toggle" data-toggle="dropdown">Sorting</button>
                                     <div class="dropdown-menu dropdown-menu-right">
                                         <a class="dropdown-item" href="#">Latest</a>
                                         <a class="dropdown-item" href="#">Popularity</a>
                                         <a class="dropdown-item" href="#">Best Rating</a>
                                     </div>
-                                </div>
+                                </div> -->
                                
                             </div>
                         </div>
@@ -492,24 +492,24 @@
                             <div class="product-img position-relative overflow-hidden">
                                 <img class="img-fluid w-100" src="<%=product.coverImage.url%>" alt="">
                                 <div class="product-action">
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href="/details?id=<%= product._id %>"><i class="fa fa-sync-alt"></i></a>
-                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                    <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a> -->
+                                    <a class="btn btn-outline-dark btn-square" href="/details?id=<%= product._id %>"><i class="fa fa-info"></i></a>
+                                    <!-- <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a> -->
                                 </div>
                             </div>
                             <div class="text-center py-4">
                                 <a class="h6 text-decoration-none text-truncate" href=""><%=product.name%></a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>&#8377;<%=product.price%></h5><h6 class="text-muted ml-2"><del>&#8377;123000.00</del></h6>
+                                    <h5>&#8377;<%=product.price%></h5>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center mb-1">
+                                    <!-- <small class="fa fa-star text-primary mr-1"></small>
                                     <small class="fa fa-star text-primary mr-1"></small>
                                     <small class="fa fa-star text-primary mr-1"></small>
                                     <small class="fa fa-star text-primary mr-1"></small>
                                     <small class="fa fa-star text-primary mr-1"></small>
-                                    <small class="fa fa-star text-primary mr-1"></small>
-                                    <small>(99)</small>
+                                    <small>(99)</small> -->
                                 </div>
                             </div>
                         </div>

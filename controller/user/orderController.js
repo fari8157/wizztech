@@ -29,8 +29,7 @@ const loadCheckoutAddress = async (req, res) => {
 
         res.render('user/checkoutAddress', { id, user: userData, contact: contactAddress, main: mainAddress, secondary: secondaryAddress, address, userId, user, category });
     } catch (error) {
-        console.error('Error loading checkout address:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -65,8 +64,7 @@ const checkoutAddAddress = async (req, res) => {
         await newAddress.save();
         res.redirect('/checkout/address');
     } catch (error) {
-        console.log(error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -93,8 +91,7 @@ const selectAddress = async (req, res) => {
             res.redirect('/');
         }
     } catch (error) {
-        console.error('Error selecting address:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -206,8 +203,7 @@ const checkout = async (req, res) => {
 
         res.json({ response: true, orderId: saveOrder._id });
     } catch (error) {
-        console.error('Error during checkout:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -247,8 +243,7 @@ const razorpay = async (req, res) => {
             }
         });
     } catch (error) {
-        console.error('Error during Razorpay:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 
@@ -275,8 +270,7 @@ const loadOrderSuccessPage = async (req, res) => {
 
         res.render('user/orderSuccess', { user, order, address, product, coupon });
     } catch (error) {
-        console.error('Error loading order success page:', error);
-        res.status(500).send('Server Error');
+        res.render("user/404")
     }
 };
 

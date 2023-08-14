@@ -34,31 +34,31 @@ routers.get("/register",adminAuth.isLogout,userAuth.isLogout,authcontroller.load
  routers.get("/details",userAuth.isLogout,home.loadDtails)
  routers.get("/category",categoryC.loadCategory)
 //.... forgetpassword..//
- routers.get("/forgetPassword",authcontroller.loadForgetpass)
+ routers.get("/forgetPassword",adminAuth.isLogout,authcontroller.loadForgetpass)
  routers.post("/forgetPassword",authcontroller.forgetPass)
- routers.get("/forget/otp",authcontroller.loadForgetOtp)
+ routers.get("/forget/otp",adminAuth.isLogout,authcontroller.loadForgetOtp)
  routers.post("/forget/otp",authcontroller.forgetOtp)
  routers.post("/resetPassword",authcontroller.updatePassword)
 ///...profile...///
  routers.get("/profile",userAuth.isLogout,home.loadprofile)
- routers.get("/profile/userUpdate",home.loadUpdateUser)
+ routers.get("/profile/userUpdate",userAuth.isLogin,home.loadUpdateUser)
  routers.post("/profile/userUpdate",home.postUpdateUser)
- routers.get("/profile/verifyPassword",home.loadVerifyOldPassword)
+ routers.get("/profile/verifyPassword",userAuth.isLogin,home.loadVerifyOldPassword)
  routers.post("/profile/verifyPassword",home.postVerifyOldPassword)
  
- routers.get("/profile/newPassword",home.loadNewpass)
+ routers.get("/profile/newPassword",userAuth.isLogin,home.loadNewpass)
  routers.post("/profile/newPassword",home.postNewpass)
  
  //....cart...//
- routers.get("/cart",cart.loadCart)
+ routers.get("/cart",userAuth.isLogin,cart.loadCart)
  routers.get("/addCart",cart.addToCart)
  routers.get('/incrementQuantity',cart.quantityIncrement)
  routers.get('/decrementQuantity',cart.quantityDecrement)
  routers.delete('/removeItem',cart.removeItem)
 //....checkOutAddress...//
-routers.get('/checkout/address',checkoutAddress.loadCheckoutAddress)
+routers.get('/checkout/address',userAuth.isLogin,checkoutAddress.loadCheckoutAddress)
 routers.post('/checkout/addAdress',checkoutAddress.checkoutAddAddress)
-routers.get('/checkout',checkoutAddress.selectAddress)
+routers.get('/checkout',userAuth.isLogin,checkoutAddress.selectAddress)
 routers.post('/checkout',checkoutAddress.checkout) 
 routers.post('/razorpay',checkoutAddress.razorpay);
 
@@ -74,15 +74,15 @@ routers.get('/order/success',checkoutAddress.loadOrderSuccessPage)
  routers.get('/wallet',userAuth.isLogin,wallet.loadWallet);
 
 
- routers.get("/addAddress",address.loadAddress)
+ routers.get("/addAddress",userAuth.isLogin,address.loadAddress)
  routers.delete('/address/delete',address.deleteAddress);
- routers.get("/profile/editAddress",address.loadEditAddress)
+ routers.get("/profile/editAddress",userAuth.isLogin,address.loadEditAddress)
  routers.post("/profile/editAddress",address.editAddress)
- routers.get("/profile/addnewadress",address.loadAddnewAddress)
+ routers.get("/profile/addnewadress",userAuth.isLogin,address.loadAddnewAddress)
  routers.post("/profile/addnewadress",address.addNewAddress)
 //  routers.get("/wishlist",home.loadWishlist)
 
- routers.get('/wishlist',wishlist.loadWishlist);
+ routers.get('/wishlist',userAuth.isLogin,wishlist.loadWishlist);
  routers.get('/addToWishlist',wishlist.addToWishlist);
 
 
